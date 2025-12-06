@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/models/video_participant.dart';
 import '../../domain/models/user_role.dart';
 import 'package:nvs/meatup_core.dart';
-import 'package:nvs/theme/nvs_palette.dart';
 
 class PresenceGrid extends ConsumerStatefulWidget {
   const PresenceGrid({
@@ -60,12 +59,12 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: NVSPalette.surfaceDark.withValues(alpha: 0.9),
+        color: NVSColors.cardBackground.withValues(alpha: 0.9),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: NVSPalette.primary.withValues(alpha: 0.3),
+          color: NVSColors.ultraLightMint.withValues(alpha: 0.3),
         ),
-        boxShadow: NVSPalette.primaryGlow,
+        boxShadow: NVSColors.mintGlow,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +82,7 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
       children: <Widget>[
         const Icon(
           Icons.people_alt_outlined,
-          color: NVSPalette.primary,
+          color: NVSColors.ultraLightMint,
           size: 20,
         ),
         const SizedBox(width: 8),
@@ -93,7 +92,7 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
             fontFamily: 'MagdaClean',
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: NVSPalette.primary,
+            color: NVSColors.ultraLightMint,
           ),
         ),
         const Spacer(),
@@ -106,16 +105,16 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: NVSPalette.secondaryDark.withValues(alpha: 0.2),
+        color: NVSColors.avocadoGreen.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: NVSPalette.secondaryDark.withValues(alpha: 0.5),
+          color: NVSColors.avocadoGreen.withValues(alpha: 0.5),
         ),
       ),
       child: const Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(Icons.grid_view, color: NVSPalette.secondaryDark, size: 14),
+          Icon(Icons.grid_view, color: NVSColors.avocadoGreen, size: 14),
           SizedBox(width: 4),
           Text(
             'GRID',
@@ -123,7 +122,7 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
               fontFamily: 'MagdaClean',
               fontSize: 10,
               fontWeight: FontWeight.w600,
-              color: NVSPalette.secondaryDark,
+              color: NVSColors.avocadoGreen,
             ),
           ),
         ],
@@ -175,22 +174,22 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: <Color>[
-              NVSPalette.background.withValues(alpha: 0.8),
-              NVSPalette.surfaceDark.withValues(alpha: 0.6),
+              NVSColors.pureBlack.withValues(alpha: 0.8),
+              NVSColors.cardBackground.withValues(alpha: 0.6),
             ],
           ),
           border: Border.all(
             color: isCurrentUser
-                ? NVSPalette.secondaryDark
+                ? NVSColors.avocadoGreen
                 : isHost || isCoHost
-                    ? NVSPalette.secondary
-                    : NVSPalette.primary.withValues(alpha: 0.3),
+                    ? NVSColors.electricPink
+                    : NVSColors.ultraLightMint.withValues(alpha: 0.3),
             width: isCurrentUser || isHost || isCoHost ? 2 : 1,
           ),
           boxShadow: isCurrentUser
               ? <BoxShadow>[
                   BoxShadow(
-                    color: NVSPalette.secondaryDark.withValues(alpha: 0.4),
+                    color: NVSColors.avocadoGreen.withValues(alpha: 0.4),
                     blurRadius: 8,
                     spreadRadius: 2,
                   ),
@@ -240,7 +239,7 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(11),
                         border: Border.all(
-                          color: NVSPalette.secondary.withValues(
+                          color: NVSColors.turquoiseNeon.withValues(
                             alpha: 0.6 * _pulseAnimation.value,
                           ),
                           width: 2,
@@ -265,15 +264,15 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: <Color>[
-            NVSPalette.surfaceDark.withValues(alpha: 0.8),
-            NVSPalette.background.withValues(alpha: 0.9),
+            NVSColors.cardBackground.withValues(alpha: 0.8),
+            NVSColors.pureBlack.withValues(alpha: 0.9),
           ],
         ),
       ),
       child: Center(
         child: Icon(
           Icons.videocam,
-          color: NVSPalette.primary.withValues(alpha: 0.6),
+          color: NVSColors.ultraLightMint.withValues(alpha: 0.6),
           size: 24,
         ),
       ),
@@ -287,8 +286,8 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
       decoration: BoxDecoration(
         gradient: RadialGradient(
           colors: <Color>[
-            NVSPalette.secondary.withValues(alpha: 0.3),
-            NVSPalette.background.withValues(alpha: 0.9),
+            NVSColors.turquoiseNeon.withValues(alpha: 0.3),
+            NVSColors.pureBlack.withValues(alpha: 0.9),
           ],
         ),
       ),
@@ -307,9 +306,9 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
                 height: 40,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: NVSPalette.primary.withValues(alpha: 0.2),
+                  color: NVSColors.ultraLightMint.withValues(alpha: 0.2),
                   border: Border.all(
-                    color: NVSPalette.primary.withValues(alpha: 0.5),
+                    color: NVSColors.ultraLightMint.withValues(alpha: 0.5),
                   ),
                 ),
                 child: Center(
@@ -321,7 +320,7 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
                       fontFamily: 'MagdaClean',
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: NVSPalette.primary,
+                      color: NVSColors.ultraLightMint,
                     ),
                   ),
                 ),
@@ -348,7 +347,7 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
           Container(
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
-              color: NVSPalette.secondary.withValues(alpha: 0.9),
+              color: NVSColors.electricPink.withValues(alpha: 0.9),
               borderRadius: BorderRadius.circular(4),
             ),
             child: const Icon(Icons.screen_share, color: Colors.white, size: 12),
@@ -362,8 +361,8 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       decoration: BoxDecoration(
         color: role == UserRole.host
-            ? NVSPalette.secondary.withValues(alpha: 0.9)
-            : NVSPalette.secondary.withValues(alpha: 0.9),
+            ? NVSColors.electricPink.withValues(alpha: 0.9)
+            : NVSColors.turquoiseNeon.withValues(alpha: 0.9),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
@@ -382,7 +381,7 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: NVSPalette.background.withValues(alpha: 0.8),
+        color: NVSColors.pureBlack.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
@@ -393,7 +392,7 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
           fontFamily: 'MagdaClean',
           fontSize: 10,
           fontWeight: FontWeight.w500,
-          color: NVSPalette.primary,
+          color: NVSColors.ultraLightMint,
         ),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
@@ -405,9 +404,9 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: NVSPalette.surfaceDark.withValues(alpha: 0.5),
+        color: NVSColors.cardBackground.withValues(alpha: 0.5),
         border: Border.all(
-          color: NVSPalette.primary.withValues(alpha: 0.3),
+          color: NVSColors.ultraLightMint.withValues(alpha: 0.3),
         ),
       ),
       child: Center(
@@ -416,7 +415,7 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
           children: <Widget>[
             Icon(
               Icons.more_horiz,
-              color: NVSPalette.primary.withValues(alpha: 0.7),
+              color: NVSColors.ultraLightMint.withValues(alpha: 0.7),
               size: 24,
             ),
             const SizedBox(height: 4),
@@ -426,7 +425,7 @@ class _PresenceGridState extends ConsumerState<PresenceGrid> with TickerProvider
                 fontFamily: 'MagdaClean',
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: NVSPalette.primary.withValues(alpha: 0.7),
+                color: NVSColors.ultraLightMint.withValues(alpha: 0.7),
               ),
             ),
           ],

@@ -1,0 +1,59 @@
+
+@layer components {
+  /* Holographic card effect */
+  .holographic-card {
+    position: relative;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #10172A 0%, #0F172A 100%);
+    overflow: hidden;
+  }
+
+  .holographic-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 0, 255, 0) 0%,
+      rgba(255, 0, 255, 0.03) 25%,
+      rgba(0, 255, 255, 0.03) 50%,
+      rgba(255, 255, 0, 0.03) 75%,
+      rgba(255, 0, 255, 0) 100%
+    );
+    background-size: 400% 400%;
+    animation: hologram-shift 8s ease infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Digital noise overlay */
+  .digital-noise {
+    position: relative;
+  }
+
+  .digital-noise::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Electric grid background */
+  .electric-grid {
+    position: relative;
+    background-color: #0A0A1A;
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}

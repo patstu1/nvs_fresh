@@ -1,0 +1,44 @@
+# lib/features/auth/data/genesis.graphql
+
+# Mutation for storing Genesis enrollment template
+mutation StoreGenesisTemplate($faceScanData: String!, $auditTrailImage: String!) {
+  storeGenesisTemplate(faceScanData: $faceScanData, auditTrailImage: $auditTrailImage) {
+    success
+    templateId
+    walletAddress
+    enrollmentTimestamp
+  }
+}
+
+# Mutation for verifying login scan against stored template
+mutation VerifyLoginScan($faceScanData: String!) {
+  verifyLoginScan(faceScanData: $faceScanData) {
+    success
+    authenticated
+    confidenceScore
+    walletAddress
+    lastLoginTimestamp
+  }
+}
+
+# Mutation for verifying profile photo against Genesis template
+mutation VerifyProfilePhoto($photoUrl: String!, $walletAddress: String!) {
+  verifyProfilePhoto(photoUrl: $photoUrl, walletAddress: $walletAddress) {
+    success
+    isVerified
+    confidenceScore
+    photoApproved
+  }
+}
+
+# Query for checking user's Genesis verification status
+query GetGenesisStatus($walletAddress: String!) {
+  genesisStatus(walletAddress: $walletAddress) {
+    isEnrolled
+    isVerified
+    enrollmentDate
+    verifiedPhotoCount
+    lastScanDate
+  }
+}
+

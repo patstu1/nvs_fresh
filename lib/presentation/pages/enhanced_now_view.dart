@@ -7,7 +7,6 @@ import '../../../../models/now_user_model.dart';
 import '../../../../data/mock_data.dart';
 import '../widgets/now_user_bubble_widget.dart';
 import '../widgets/now_user_overlay_widget.dart';
-import 'package:nvs/theme/nvs_palette.dart';
 
 enum NowViewState { intro, mapLoading, mapLive, profileOpen }
 
@@ -131,7 +130,7 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: NVSPalette.background,
+      backgroundColor: NVSColors.pureBlack,
       body: Stack(
         children: [
           // Main content based on state
@@ -163,7 +162,7 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
 
   Widget _buildIntroContent() {
     return Container(
-      color: NVSPalette.background,
+      color: NVSColors.pureBlack,
       child: Stack(
         children: [
           // Video background if available
@@ -190,7 +189,7 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
                         shadows: [
                           Shadow(
                             color:
-                                NVSPalette.primary.withValues(alpha: 0.8),
+                                NVSColors.ultraLightMint.withValues(alpha: 0.8),
                             blurRadius: 20,
                           ),
                         ],
@@ -211,14 +210,14 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
                 Text(
                   'CONNECTING TO LIVE MAP',
                   style: TextStyle(
-                    color: NVSPalette.primary,
+                    color: NVSColors.ultraLightMint,
                     fontSize: 18,
                     fontFamily: 'MagdaCleanMono',
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
                     shadows: [
                       Shadow(
-                        color: NVSPalette.primary.withValues(alpha: 0.5),
+                        color: NVSColors.ultraLightMint.withValues(alpha: 0.5),
                         blurRadius: 8,
                       ),
                     ],
@@ -233,12 +232,12 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
                       height: 40,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: NVSPalette.primary.withValues(
+                        color: NVSColors.ultraLightMint.withValues(
                           alpha: _pulseAnimation.value * 0.3,
                         ),
                       ),
                       child: CircularProgressIndicator(
-                        color: NVSPalette.primary,
+                        color: NVSColors.ultraLightMint,
                         strokeWidth: 3,
                       ),
                     );
@@ -254,7 +253,7 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
 
   Widget _buildMapLoadingContent() {
     return Container(
-      color: NVSPalette.background,
+      color: NVSColors.pureBlack,
       child: Center(
         child: AnimatedBuilder(
           animation: Listenable.merge([_scaleAnimation, _fadeAnimation]),
@@ -270,9 +269,9 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
                     shape: BoxShape.circle,
                     gradient: RadialGradient(
                       colors: [
-                        NVSPalette.primary.withValues(alpha: 0.8),
-                        NVSPalette.secondaryDark.withValues(alpha: 0.4),
-                        NVSPalette.transparent,
+                        NVSColors.ultraLightMint.withValues(alpha: 0.8),
+                        NVSColors.avocadoGreen.withValues(alpha: 0.4),
+                        Colors.transparent,
                       ],
                     ),
                   ),
@@ -284,7 +283,7 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
                         shadows: [
                           Shadow(
                             color:
-                                NVSPalette.primary.withValues(alpha: 0.8),
+                                NVSColors.ultraLightMint.withValues(alpha: 0.8),
                             blurRadius: 15,
                           ),
                         ],
@@ -307,8 +306,8 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
           center: Alignment.center,
           radius: 1.5,
           colors: [
-            NVSPalette.primary.withValues(alpha: 0.1),
-            NVSPalette.background,
+            NVSColors.ultraLightMint.withValues(alpha: 0.1),
+            NVSColors.pureBlack,
           ],
         ),
       ),
@@ -374,15 +373,15 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: NVSPalette.surfaceDark,
+          color: NVSColors.cardBackground,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: NVSPalette.primary.withValues(alpha: 0.6),
+            color: NVSColors.ultraLightMint.withValues(alpha: 0.6),
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: NVSPalette.primary.withValues(alpha: 0.2),
+              color: NVSColors.ultraLightMint.withValues(alpha: 0.2),
               blurRadius: 8,
               spreadRadius: 1,
             ),
@@ -398,11 +397,11 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
                   width: 8,
                   height: 8,
                   decoration: BoxDecoration(
-                    color: NVSPalette.secondaryDark,
+                    color: NVSColors.avocadoGreen,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: NVSPalette.secondaryDark.withValues(
+                        color: NVSColors.avocadoGreen.withValues(
                           alpha: _pulseAnimation.value * 0.6,
                         ),
                         blurRadius: 4,
@@ -417,7 +416,7 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
             Text(
               "LIVE MAP • ${_nearbyUsers.length} NEARBY",
               style: TextStyle(
-                color: NVSPalette.primary,
+                color: NVSColors.ultraLightMint,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'MagdaCleanMono',
@@ -450,17 +449,17 @@ class _EnhancedNowViewState extends ConsumerState<EnhancedNowView>
       width: 44,
       height: 44,
       decoration: BoxDecoration(
-        color: NVSPalette.surfaceDark,
+        color: NVSColors.cardBackground,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: NVSPalette.primary.withValues(alpha: 0.3),
+          color: NVSColors.ultraLightMint.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
       child: IconButton(
         icon: Icon(
           icon,
-          color: NVSPalette.primary,
+          color: NVSColors.ultraLightMint,
           size: 20,
         ),
         onPressed: () {
@@ -487,7 +486,7 @@ class GridPatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = NVSPalette.primary.withValues(alpha: 0.05)
+      ..color = NVSColors.ultraLightMint.withValues(alpha: 0.05)
       ..strokeWidth = 0.5;
 
     const spacing = 50.0;

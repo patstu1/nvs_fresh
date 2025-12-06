@@ -1,0 +1,18 @@
+# lib/features/meatup/data/meatup.graphql
+
+query GetMeatupProfiles($limit: Int!, $offset: Int, $sortBy: String, $filters: [FilterInput!]) {
+  # The gateway will resolve this query to the appropriate backend services.
+  # It will fetch profiles and then enrich them with compatibility scores from the AI service.
+  profiles(limit: $limit, offset: offset, sortBy: $sortBy, filters: $filters) {
+    # We only fetch the data needed for the grid tile.
+    # The full profile is fetched when a tile is tapped.
+    userProfile {
+      walletAddress
+      ipfsDataUri # Points to the JSON with photo CIDs
+      verificationStatus
+    }
+    # This is the crucial data from our AI core.
+    compatibilityScore
+  }
+}
+

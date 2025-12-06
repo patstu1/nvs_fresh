@@ -1,0 +1,111 @@
+@layer components {
+  .neon-text {
+    color: #90EEC0;
+    text-shadow: 0 0 8px rgba(75, 239, 224, 0.6), 0 0 12px rgba(75, 239, 224, 0.4);
+    @apply transition-all duration-300;
+  }
+  
+  .neon-text:hover {
+    color: #B4FFD8;
+    text-shadow: 0 0 12px rgba(75, 239, 224, 0.8), 0 0 16px rgba(75, 239, 224, 0.6);
+  }
+  
+  .neon-text-subtle {
+    color: #4BEFE0;
+    text-shadow: 
+      0 0 4px rgba(75, 239, 224, 0.5), 
+      0 0 8px rgba(75, 239, 224, 0.3);
+    @apply transition-all duration-300;
+  }
+  
+  .neon-text-subtle:hover {
+    color: #00BBAA;
+    text-shadow: 
+      0 0 8px rgba(75, 239, 224, 0.8), 
+      0 0 12px rgba(75, 239, 224, 0.6);
+  }
+
+  .zoom-room-button {
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(194, 255, 230, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(194, 255, 230, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(194, 255, 230, 0);
+    }
+  }
+
+  .neon-text-giant {
+    @apply text-[32rem] font-black tracking-widest leading-none z-50 relative;
+    -webkit-text-stroke: 2px #FF00FF;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 
+      0 0 7px #FF00FF,
+      0 0 10px #FF00FF,
+      0 0 21px #FF00FF,
+      0 0 42px #FF00FF,
+      0 0 82px #FF00FF,
+      0 0 92px #FF00FF,
+      0 0 102px #FF00FF,
+      0 0 151px #FF00FF;
+    animation: neon-flash 1.5s infinite alternate;
+    filter: brightness(1.2) contrast(1.1);
+  }
+
+  @keyframes neon-flash {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      text-shadow:
+        0 0 7px #FF00FF,
+        0 0 10px #FF00FF,
+        0 0 21px #FF00FF,
+        0 0 42px #FF00FF,
+        0 0 82px #FF00FF,
+        0 0 92px #FF00FF,
+        0 0 102px #FF00FF,
+        0 0 151px #FF00FF;
+    }
+    20%, 24%, 55% {
+      text-shadow: none;
+    }
+  }
+
+  .stats-neon-glow {
+    box-shadow: 0 0 10px rgba(194, 255, 230, 0.2),
+              0 0 20px rgba(194, 255, 230, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .stats-neon-glow:hover {
+    box-shadow: 0 0 15px rgba(194, 255, 230, 0.3),
+              0 0 30px rgba(194, 255, 230, 0.2);
+  }
+
+  .chart-neon-grid {
+    stroke: rgba(194, 255, 230, 0.1);
+    stroke-width: 1;
+  }
+
+  .chart-neon-grid-hover {
+    stroke: rgba(194, 255, 230, 0.2);
+    stroke-width: 1.5;
+  }
+
+  .neon-glow {
+    transition: all 0.3s ease;
+    box-shadow: 
+      0 0 10px rgba(75, 239, 224, 0.3), 
+      0 0 20px rgba(75, 239, 224, 0.2);
+  }
+
+  .neon-glow:hover {
+    box-shadow: 
+      0 0 15px rgba(75, 239, 224, 0.5), 
+      0 0 30px rgba(75, 239, 224, 0.3);
+  }
+}

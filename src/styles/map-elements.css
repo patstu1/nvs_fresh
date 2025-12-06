@@ -1,0 +1,39 @@
+
+@layer components {
+  /* Map-specific animations */
+  .radar-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #C2FFE6;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 5px #C2FFE6;
+  }
+
+  .radar-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 1px solid #C2FFE6;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 2px #C2FFE6;
+  }
+
+  /* Additional Animation for Map Icons */
+  .map-icon-pulse {
+    animation: icon-pulse 1.5s infinite alternate;
+  }
+
+  /* Profile card for map */
+  .profile-card {
+    background: rgba(15, 24, 40, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(198, 255, 230, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+}

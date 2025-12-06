@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import '../../data/mock_data.dart';
+import 'package:chewie/chewie.dart';
 import '../../widgets/filter_button.dart';
 import '../../widgets/user_cluster_avatar.dart';
 import '../../widgets/user_profile_drawer.dart';
@@ -16,6 +16,7 @@ class SimpleNowView extends StatefulWidget {
 class _SimpleNowViewState extends State<SimpleNowView>
     with TickerProviderStateMixin {
   late VideoPlayerController _videoController;
+  late ChewieController _chewieController;
   bool _showGlobe = true;
   bool _showMap = false;
   bool _showDrawer = false;
@@ -35,10 +36,15 @@ class _SimpleNowViewState extends State<SimpleNowView>
     _videoController = VideoPlayerController.asset(
       'assets/videos/spinning_globe_now_loading.mp4',
     );
-    _videoController.initialize().then((_) {
-      setState(() {});
-      _videoController.play();
-    });
+    _chewieController = ChewieController(
+      videoPlayerController: _videoController,
+      autoPlay: true,
+      looping: false,
+      aspectRatio: 1.0,
+      allowFullScreen: false,
+      allowMuting: false,
+      showControls: false,
+    );
 
     _videoController.addListener(() {
       if (_videoController.value.position >= const Duration(seconds: 3)) {
@@ -82,6 +88,7 @@ class _SimpleNowViewState extends State<SimpleNowView>
   @override
   void dispose() {
     _videoController.dispose();
+    _chewieController.dispose();
     _fadeController.dispose();
     super.dispose();
   }
@@ -101,7 +108,7 @@ class _SimpleNowViewState extends State<SimpleNowView>
               child: Center(
                 child: AspectRatio(
                   aspectRatio: 1.0,
-                  child: VideoPlayer(_videoController),
+                  child: Chewie(controller: _chewieController),
                 ),
               ),
             ),
@@ -177,7 +184,7 @@ class _SimpleNowViewState extends State<SimpleNowView>
 
   Widget _buildUserClusters() {
     return Stack(
-      children: nowMockUsers.map((user) {
+      children: mockUsers.map((user) {
         return Positioned(
           top: user.top,
           left: user.left,

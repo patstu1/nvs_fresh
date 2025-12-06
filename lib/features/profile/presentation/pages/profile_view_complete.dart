@@ -3,8 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../state/profile_setup_controller.dart';
-import 'package:nvs/theme/nvs_palette.dart';
+import 'package:nvs/features/profile_setup/state/profile_setup_controller.dart';
 
 class ProfileView extends ConsumerWidget {
   const ProfileView({super.key});
@@ -12,6 +11,7 @@ class ProfileView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(profileSetupProvider);
+    final bool isIncognito = profile.isIncognito ?? false;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -89,11 +89,11 @@ class ProfileView extends ConsumerWidget {
             onPressed: () {
               // TODO: Toggle incognito state
             },
-            icon: Icon(profile.isIncognito
+            icon: Icon(isIncognito
                 ? Icons.visibility_off
                 : Icons.visibility,),
             label: Text(
-              profile.isIncognito ? 'Go Visible' : 'Go Incognito',
+              isIncognito ? 'Go Visible' : 'Go Incognito',
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFCCFF33),

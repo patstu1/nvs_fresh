@@ -1,0 +1,71 @@
+
+@layer components {
+  .neon-glow {
+    box-shadow: 0 0 8px rgba(194, 255, 230, 0.5);
+  }
+
+  .interactive-element {
+    @apply transition-all duration-300;
+  }
+
+  .interactive-element:hover {
+    @apply scale-105;
+    filter: brightness(1.2);
+    text-shadow: 0 0 8px rgba(248, 248, 255, 0.7);
+    box-shadow: 0 0 12px rgba(255, 209, 220, 0.4);
+  }
+
+  .interactive-element:active {
+    @apply scale-95;
+    filter: brightness(1.4);
+    text-shadow: 0 0 12px rgba(248, 248, 255, 0.9);
+    box-shadow: 0 0 16px rgba(255, 209, 220, 0.6);
+  }
+
+  .interactive-element:focus-visible {
+    @apply outline-none;
+    box-shadow: 0 0 0 2px rgba(255, 209, 220, 0.5), 0 0 8px rgba(248, 248, 255, 0.4);
+  }
+  
+  /* Luxury utilities */
+  .luxury-shadow {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 
+                0 0 8px rgba(255, 209, 220, 0.2);
+  }
+  
+  .luxury-glow {
+    filter: drop-shadow(0 0 8px rgba(255, 209, 220, 0.4))
+           drop-shadow(0 0 4px rgba(248, 248, 255, 0.3));
+  }
+  
+  .luxury-border {
+    @apply border border-luxury-pink/30;
+  }
+  
+  .luxury-backdrop {
+    @apply backdrop-blur-md bg-luxury-snakeskin-dark/80;
+  }
+  
+  .luxury-text-glow {
+    text-shadow: 0 0 8px rgba(248, 248, 255, 0.5);
+  }
+  
+  .luxury-glass {
+    @apply bg-luxury-snakeskin-dark/50 backdrop-blur-md border border-luxury-pink/20;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+  
+  .luxury-focus-ring {
+    @apply focus:outline-none focus:ring-1 focus:ring-luxury-pink/50 focus:ring-offset-0;
+  }
+  
+  .luxury-hover {
+    @apply hover:bg-luxury-pink/10 hover:border-luxury-pink/40;
+    transition: all 0.3s ease;
+  }
+  
+  .crystal-glass {
+    @apply bg-luxury-crystal/5 backdrop-blur-lg border border-luxury-crystal/20;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  }
+}

@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nvs/meatup_core.dart';
 import '../widgets/neon_profile_card.dart';
+import '../widgets/cyberpunk_filter_bar.dart';
 import '../../data/grid_provider.dart';
 import '../components/universal_messaging_sheet.dart';
-import 'package:nvs/theme/nvs_palette.dart';
 
 /// Production-ready Meatup with beautiful neon styling, working filters, and no mocks
 class ProductionMeatupView extends ConsumerStatefulWidget {
@@ -77,7 +77,7 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
     final gridUsersAsync = ref.watch(gridUsersProvider);
 
     return Scaffold(
-      backgroundColor: NVSPalette.background,
+      backgroundColor: NVSColors.pureBlack,
       body: SafeArea(
         child: Column(
           children: [
@@ -111,15 +111,15 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
                   fontFamily: 'MagdaCleanMono',
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: NVSPalette.primary,
+                  color: NVSColors.ultraLightMint,
                   shadows: [
                     Shadow(
-                      color: NVSPalette.primary.withValues(alpha: _glowAnimation.value * 0.9),
+                      color: NVSColors.ultraLightMint.withValues(alpha: _glowAnimation.value * 0.9),
                       blurRadius: 12,
                       offset: const Offset(0, 0),
                     ),
                     Shadow(
-                      color: NVSPalette.secondaryDark.withValues(alpha: _glowAnimation.value * 0.6),
+                      color: NVSColors.avocadoGreen.withValues(alpha: _glowAnimation.value * 0.6),
                       blurRadius: 24,
                       offset: const Offset(0, 0),
                     ),
@@ -150,19 +150,19 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: NVSPalette.primary.withValues(alpha: 0.4),
+                color: NVSColors.ultraLightMint.withValues(alpha: 0.4),
                 width: 1.5,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: NVSPalette.primary.withValues(alpha: 0.2),
+                  color: NVSColors.ultraLightMint.withValues(alpha: 0.2),
                   blurRadius: 8,
                   spreadRadius: 1,
                 ),
               ],
             ),
             child: IconButton(
-              icon: Icon(icon, color: NVSPalette.primary, size: 20),
+              icon: Icon(icon, color: NVSColors.ultraLightMint, size: 20),
               onPressed: onPressed,
             ),
           ),
@@ -236,19 +236,19 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
             color: isSelected
-                ? NVSPalette.primary.withValues(alpha: 0.2)
+                ? NVSColors.ultraLightMint.withValues(alpha: 0.2)
                 : Colors.transparent,
             border: Border.all(
               color: isSelected
-                  ? NVSPalette.primary
-                  : NVSPalette.primary.withValues(alpha: 0.4),
+                  ? NVSColors.ultraLightMint
+                  : NVSColors.ultraLightMint.withValues(alpha: 0.4),
               width: isSelected ? 2 : 1,
             ),
             borderRadius: BorderRadius.circular(20),
             boxShadow: isSelected
                 ? [
                     BoxShadow(
-                      color: NVSPalette.primary.withValues(alpha: 0.3),
+                      color: NVSColors.ultraLightMint.withValues(alpha: 0.3),
                       blurRadius: 8,
                       spreadRadius: 1,
                     ),
@@ -261,7 +261,7 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
               fontFamily: 'MagdaCleanMono',
               fontSize: 14,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              color: isSelected ? NVSPalette.primary : NVSPalette.textSecondary,
+              color: isSelected ? NVSColors.ultraLightMint : NVSColors.secondaryText,
             ),
           ),
         ),
@@ -276,16 +276,16 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: _isOnlineOnly ? NVSPalette.secondaryDark.withValues(alpha: 0.2) : Colors.transparent,
+          color: _isOnlineOnly ? NVSColors.avocadoGreen.withValues(alpha: 0.2) : Colors.transparent,
           border: Border.all(
-            color: _isOnlineOnly ? NVSPalette.secondaryDark : NVSPalette.textSecondary,
+            color: _isOnlineOnly ? NVSColors.avocadoGreen : NVSColors.secondaryText,
             width: _isOnlineOnly ? 2 : 1,
           ),
           borderRadius: BorderRadius.circular(20),
           boxShadow: _isOnlineOnly
               ? [
                   BoxShadow(
-                    color: NVSPalette.secondaryDark.withValues(alpha: 0.3),
+                    color: NVSColors.avocadoGreen.withValues(alpha: 0.3),
                     blurRadius: 8,
                     spreadRadius: 1,
                   ),
@@ -299,7 +299,7 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
               width: 8,
               height: 8,
               decoration: BoxDecoration(
-                color: _isOnlineOnly ? NVSPalette.secondaryDark : NVSPalette.textSecondary,
+                color: _isOnlineOnly ? NVSColors.avocadoGreen : NVSColors.secondaryText,
                 shape: BoxShape.circle,
               ),
             ),
@@ -310,7 +310,7 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
                 fontFamily: 'MagdaCleanMono',
                 fontSize: 14,
                 fontWeight: _isOnlineOnly ? FontWeight.bold : FontWeight.normal,
-                color: _isOnlineOnly ? NVSPalette.secondaryDark : NVSPalette.textSecondary,
+                color: _isOnlineOnly ? NVSColors.avocadoGreen : NVSColors.secondaryText,
               ),
             ),
           ],
@@ -329,20 +329,20 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
       height: 40,
       padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        border: Border.all(color: NVSPalette.primary.withValues(alpha: 0.4)),
+        border: Border.all(color: NVSColors.ultraLightMint.withValues(alpha: 0.4)),
         borderRadius: BorderRadius.circular(12),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: value,
           onChanged: onChanged,
-          dropdownColor: NVSPalette.surfaceDark,
+          dropdownColor: NVSColors.cardBackground,
           style: TextStyle(
             fontFamily: 'MagdaCleanMono',
             fontSize: 12,
-            color: NVSPalette.primary,
+            color: NVSColors.ultraLightMint,
           ),
-          icon: Icon(Icons.keyboard_arrow_down, color: NVSPalette.primary, size: 16),
+          icon: Icon(Icons.keyboard_arrow_down, color: NVSColors.ultraLightMint, size: 16),
           items: options
               .map(
                 (option) => DropdownMenuItem(
@@ -398,12 +398,12 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
       itemBuilder: (context, index) {
         return Container(
               decoration: BoxDecoration(
-                color: NVSPalette.surfaceDark,
+                color: NVSColors.cardBackground,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: NVSPalette.primary.withValues(alpha: 0.2)),
+                border: Border.all(color: NVSColors.ultraLightMint.withValues(alpha: 0.2)),
               ),
               child: Center(
-                child: CircularProgressIndicator(color: NVSPalette.primary, strokeWidth: 2),
+                child: CircularProgressIndicator(color: NVSColors.ultraLightMint, strokeWidth: 2),
               ),
             )
             .animate(onPlay: (controller) => controller.repeat())
@@ -417,14 +417,14 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.error_outline, color: NVSPalette.primary, size: 48),
+          Icon(Icons.error_outline, color: NVSColors.ultraLightMint, size: 48),
           const SizedBox(height: 16),
           Text(
             'Failed to load profiles',
             style: TextStyle(
               fontFamily: 'MagdaCleanMono',
               fontSize: 18,
-              color: NVSPalette.primary,
+              color: NVSColors.ultraLightMint,
             ),
           ),
           const SizedBox(height: 8),
@@ -433,7 +433,7 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
             style: TextStyle(
               fontFamily: 'MagdaCleanMono',
               fontSize: 14,
-              color: NVSPalette.textSecondary,
+              color: NVSColors.secondaryText,
             ),
             textAlign: TextAlign.center,
           ),
@@ -441,8 +441,8 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
           ElevatedButton(
             onPressed: () => ref.refresh(gridUsersProvider),
             style: ElevatedButton.styleFrom(
-              backgroundColor: NVSPalette.primary.withValues(alpha: 0.2),
-              foregroundColor: NVSPalette.primary,
+              backgroundColor: NVSColors.ultraLightMint.withValues(alpha: 0.2),
+              foregroundColor: NVSColors.ultraLightMint,
             ),
             child: const Text('Retry'),
           ),
@@ -457,8 +457,7 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
           !user.position.toLowerCase().contains(_selectedFilter.toLowerCase())) {
         return false;
       }
-      final bool matchesLocation = user.location?.contains(_selectedLocation) ?? false;
-      if (_selectedLocation != 'All Cities' && !matchesLocation) {
+      if (_selectedLocation != 'All Cities' && !user.location.contains(_selectedLocation)) {
         return false;
       }
       if (_selectedRole != 'All Roles' &&
@@ -477,7 +476,7 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Search coming soon!', style: TextStyle(fontFamily: 'MagdaCleanMono')),
-        backgroundColor: NVSPalette.surfaceDark,
+        backgroundColor: NVSColors.cardBackground,
       ),
     );
   }
@@ -508,7 +507,7 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
           'Opening ${user.displayName}\'s profile',
           style: TextStyle(fontFamily: 'MagdaCleanMono'),
         ),
-        backgroundColor: NVSPalette.surfaceDark,
+        backgroundColor: NVSColors.cardBackground,
       ),
     );
   }
@@ -521,7 +520,7 @@ class _ProductionMeatupViewState extends ConsumerState<ProductionMeatupView>
           'Message ${user.displayName}',
           style: TextStyle(fontFamily: 'MagdaCleanMono'),
         ),
-        backgroundColor: NVSPalette.surfaceDark,
+        backgroundColor: NVSColors.cardBackground,
       ),
     );
   }

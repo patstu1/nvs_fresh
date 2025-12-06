@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nvs/meatup_core.dart';
-import 'package:nvs/theme/nvs_palette.dart';
 // Removed mock data import for now - will be replaced with proper data layer
 
 /// Main Grid view for browsing user profiles
@@ -45,14 +44,14 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
     final List<Map<String, dynamic>> users = <Map<String, dynamic>>[];
 
     return Scaffold(
-      backgroundColor: NVSPalette.background,
+      backgroundColor: NVSColors.pureBlack,
       body: SafeArea(
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
             // App Bar with NVS branding
             SliverAppBar(
-              backgroundColor: NVSPalette.background,
+              backgroundColor: NVSColors.pureBlack,
               elevation: 0,
               floating: true,
               snap: true,
@@ -65,17 +64,17 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
                       fontFamily: 'MagdaCleanMono',
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: NVSPalette.primary,
+                      color: NVSColors.ultraLightMint,
                       shadows: [
                         Shadow(
-                          color: NVSPalette.primary.withValues(
+                          color: NVSColors.ultraLightMint.withValues(
                             alpha: _glowAnimation.value * 0.8,
                           ),
                           blurRadius: 8,
                           offset: const Offset(0, 0),
                         ),
                         Shadow(
-                          color: NVSPalette.secondaryDark.withValues(
+                          color: NVSColors.avocadoGreen.withValues(
                             alpha: _glowAnimation.value * 0.4,
                           ),
                           blurRadius: 16,
@@ -88,7 +87,7 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
               ),
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.tune, color: NVSPalette.primary),
+                  icon: const Icon(Icons.tune, color: NVSColors.ultraLightMint),
                   onPressed: () {
                     // TODO: Open filter/settings
                   },
@@ -106,13 +105,13 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
                   horizontal: 16,
                 ),
                 decoration: BoxDecoration(
-                  color: NVSPalette.transparent,
+                  color: Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: NVSPalette.primary.withValues(alpha: 0.3),
+                    color: NVSColors.ultraLightMint.withValues(alpha: 0.3),
                     width: 1,
                   ),
-                  boxShadow: NVSPalette.primaryGlow,
+                  boxShadow: NVSColors.mintGlow,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -158,7 +157,7 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
             fontFamily: 'MagdaCleanMono',
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: NVSPalette.primary,
+            color: NVSColors.ultraLightMint,
           ),
         ),
         const SizedBox(height: 2),
@@ -167,7 +166,7 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
           style: const TextStyle(
             fontFamily: 'MagdaCleanMono',
             fontSize: 12,
-            color: NVSPalette.textSecondary,
+            color: NVSColors.secondaryText,
           ),
         ),
       ],
@@ -186,28 +185,28 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('Viewing ${user['name']}\'s profile'),
-                backgroundColor: NVSPalette.surfaceDark,
+                backgroundColor: NVSColors.cardBackground,
               ),
             );
           },
           child: Container(
             decoration: BoxDecoration(
-              color: NVSPalette.surfaceDark,
+              color: NVSColors.cardBackground,
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: NVSPalette.primary.withValues(alpha: 0.2),
+                color: NVSColors.ultraLightMint.withValues(alpha: 0.2),
                 width: 1,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: NVSPalette.primary.withValues(
+                  color: NVSColors.ultraLightMint.withValues(
                     alpha: delayedGlow * 0.3,
                   ),
                   blurRadius: 12,
                   spreadRadius: 1,
                 ),
                 BoxShadow(
-                  color: NVSPalette.secondaryDark.withValues(
+                  color: NVSColors.avocadoGreen.withValues(
                     alpha: delayedGlow * 0.2,
                   ),
                   blurRadius: 20,
@@ -225,7 +224,7 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
                     margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: NVSPalette.primary.withValues(alpha: 0.1),
+                      color: NVSColors.ultraLightMint.withValues(alpha: 0.1),
                     ),
                     child: user['avatar'] != null
                         ? ClipRRect(
@@ -258,7 +257,7 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
                             fontFamily: 'MagdaCleanMono',
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: NVSPalette.primary,
+                            color: NVSColors.ultraLightMint,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -269,7 +268,7 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
                           style: const TextStyle(
                             fontFamily: 'MagdaCleanMono',
                             fontSize: 11,
-                            color: NVSPalette.textSecondary,
+                            color: NVSColors.secondaryText,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -294,8 +293,8 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            NVSPalette.primary.withValues(alpha: 0.2),
-            NVSPalette.secondaryDark.withValues(alpha: 0.1),
+            NVSColors.ultraLightMint.withValues(alpha: 0.2),
+            NVSColors.avocadoGreen.withValues(alpha: 0.1),
           ],
         ),
       ),
@@ -306,7 +305,7 @@ class _NVSGridViewState extends ConsumerState<NVSGridView>
             fontFamily: 'MagdaCleanMono',
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: NVSPalette.primary,
+            color: NVSColors.ultraLightMint,
           ),
         ),
       ),

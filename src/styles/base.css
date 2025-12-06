@@ -1,0 +1,50 @@
+
+@layer base {
+  html {
+    font-family: 'Le Labo', monospace;
+    background: #1a1a1a;
+  }
+  
+  body {
+    @apply bg-luxury-snakeskin-dark;
+    color: #F8F8FF;
+    text-shadow: 0 0 3px rgba(248, 248, 255, 0.3);
+    font-family: 'Playfair Display', serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-luxury-pink;
+    text-shadow: 0 0 6px rgba(255, 209, 220, 0.5), 0 0 10px rgba(255, 209, 220, 0.3);
+    @apply transition-all duration-300;
+    font-family: 'Playfair Display', serif;
+  }
+
+  h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+    @apply text-luxury-pink;
+    text-shadow: 0 0 8px rgba(255, 209, 220, 0.7), 0 0 12px rgba(255, 209, 220, 0.5);
+  }
+
+  p, span, a, button, input, textarea, select {
+    @apply text-luxury-crystal;
+    text-shadow: 0 0 3px rgba(248, 248, 255, 0.3);
+    @apply transition-all duration-300;
+  }
+  
+  p:hover, span:hover, a:hover, button:hover {
+    @apply text-luxury-crystal;
+    text-shadow: 0 0 6px rgba(248, 248, 255, 0.5);
+  }
+  
+  button, a, [role="button"], select, input {
+    @apply focus:outline-none interactive-element;
+  }
+
+  button:focus-visible, a:focus-visible, [role="button"]:focus-visible {
+    @apply ring-1 ring-luxury-crystal/70 ring-offset-0;
+  }
+  
+  input, textarea, select {
+    @apply bg-luxury-snakeskin-dark bg-opacity-80 border border-luxury-pink/30;
+    @apply focus:border-luxury-pink/50 focus:ring-1 focus:ring-luxury-pink/30;
+  }
+}

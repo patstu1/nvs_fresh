@@ -4,7 +4,6 @@ import '../../data/connect_ai_service.dart' as connect_ai;
 import 'package:nvs/data/now_mock_users.dart' as now_data;
 import '../../../../shared/widgets/nvs_logo_video.dart';
 import '../../../../shared/widgets/section_label.dart';
-import 'package:nvs/theme/nvs_palette.dart';
 // import '../../services/nvs_ai_voice_service.dart'; // Unused import
 
 class ConnectPageStack extends StatelessWidget {
@@ -19,7 +18,7 @@ class ConnectPageStack extends StatelessWidget {
       role: now_data.nowMockUsers.first.role,
     );
     return Scaffold(
-      backgroundColor: NVSPalette.background,
+      backgroundColor: NVSColors.pureBlack,
       body: Stack(
         children: <Widget>[
           const Positioned(
@@ -41,7 +40,7 @@ class ConnectPageStack extends StatelessWidget {
           // Section Label
           const SectionLabel(
             sectionName: 'CONNECT',
-            glowColor: NVSPalette.primary,
+            glowColor: NVSColors.primaryNeonMint,
             alignment: Alignment.topLeft,
             padding: EdgeInsets.all(16),
           ),
@@ -67,7 +66,7 @@ Widget pageScaffold({required String title, required Widget child}) {
         Text(
           title,
           style: const TextStyle(
-            color: NVSPalette.primary,
+            color: NVSColors.neonMint,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),

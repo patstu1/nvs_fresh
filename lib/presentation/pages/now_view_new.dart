@@ -2,11 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/now_mock_users.dart';
-import 'package:nvs/domain/models/now_user_model.dart';
+import '../../domain/models/now_user_model.dart';
 import '../widgets/now_user_bubble.dart';
 import '../widgets/now_user_overlay.dart';
 import 'package:nvs/meatup_core.dart';
-import 'package:nvs/theme/nvs_palette.dart';
 
 class NowViewNew extends ConsumerStatefulWidget {
   const NowViewNew({super.key});
@@ -35,7 +34,7 @@ class _NowViewNewState extends ConsumerState<NowViewNew> {
     final users = nowMockUsers;
 
     return Container(
-      color: NVSPalette.background,
+      color: NVSColors.pureBlack,
       child: Stack(
         children: [
           // Background gradient
@@ -45,9 +44,9 @@ class _NowViewNewState extends ConsumerState<NowViewNew> {
                 center: Alignment.center,
                 radius: 1.5,
                 colors: [
-                  NVSPalette.surfaceDark.withValues(alpha: 0.3),
-                  NVSPalette.background,
-                  NVSPalette.background,
+                  NVSColors.cardBackground.withValues(alpha: 0.3),
+                  NVSColors.pureBlack,
+                  NVSColors.pureBlack,
                 ],
                 stops: const [0.0, 0.7, 1.0],
               ),
@@ -67,15 +66,15 @@ class _NowViewNewState extends ConsumerState<NowViewNew> {
                       fontFamily: 'MagdaCleanMono',
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: NVSPalette.primary,
-                      shadows: NVSPalette.NVSPalette.primary,
+                      color: NVSColors.ultraLightMint,
+                      shadows: NVSColors.mintTextShadow,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Live map • ${users.length} users nearby',
                     style: TextStyle(
-                      color: NVSPalette.textSecondary,
+                      color: NVSColors.secondaryText,
                       fontSize: 14,
                     ),
                   ),
@@ -88,10 +87,10 @@ class _NowViewNewState extends ConsumerState<NowViewNew> {
                         shrinkWrap: true,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              crossAxisSpacing: 40,
-                              mainAxisSpacing: 40,
-                            ),
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 40,
+                          mainAxisSpacing: 40,
+                        ),
                         itemCount: users.length,
                         itemBuilder: (context, index) {
                           final user = users[index];
@@ -110,7 +109,10 @@ class _NowViewNewState extends ConsumerState<NowViewNew> {
 
           // User overlay
           if (selectedUser != null)
-            NowUserOverlay(selectedUser: selectedUser, onClose: _closeOverlay),
+            NowUserOverlay(
+              selectedUser: selectedUser,
+              onClose: _closeOverlay,
+            ),
         ],
       ),
     );

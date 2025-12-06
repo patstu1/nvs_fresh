@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../../../.."
+		}
+	],
+	"settings": {
+		"typescript.disableAutomaticTypeAcquisition": true,
+		"workbench.editor.autoLockGroups": {
+			"default": true,
+			"workbench.editorinputs.searchEditorInput": true
+		},
+		"workbench.editor.enablePreviewFromCodeNavigation": true,
+		"workbench.editor.preferHistoryBasedLanguageDetection": true
+	}
+}

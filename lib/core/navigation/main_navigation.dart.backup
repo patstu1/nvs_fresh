@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:nvs_grid/presentation/pages/grid_page.dart';
+import 'package:nvs_now/presentation/pages/now_page.dart';
+import 'package:nvs/features/connect/presentation/screens/nvs_connect_screen.dart';
+import 'package:nvs/features/live/presentation/screens/nvs_live_screen.dart';
+import 'package:nvs/features/chat/presentation/pages/global_chat_page.dart';
+import 'package:nvs/features/search/presentation/pages/search_page.dart';
+import 'package:nvs_core/nvs_core.dart';
+import '../widgets/nvs_bottom_navigation.dart';
+
+class MainNavigationWidget extends StatefulWidget {
+  const MainNavigationWidget({super.key});
+
+  @override
+  State<MainNavigationWidget> createState() => _MainNavigationWidgetState();
+}
+
+class _MainNavigationWidgetState extends State<MainNavigationWidget> {
+  int _currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: NVSColors.pureBlack,
+      body: _buildCurrentScreen(),
+      bottomNavigationBar: NvsBottomNavigation(
+        currentIndex: _currentIndex,
+        onTap: (index) => setState(() => _currentIndex = index),
+      ),
+    );
+  }
+
+  Widget _buildCurrentScreen() {
+    // Screen order: Grid, Now, Connect, Live, Messages, Search
+    Widget currentScreen;
+
+    switch (_currentIndex) {
+      case 0:
+        currentScreen = const GridPage(); // 🩲 Grid View
+        break;
+      case 1:
+        currentScreen = const NowView(); // 📡 Now (Live Map + Intro)
+        break;
+      case 2:
+        currentScreen = const NvsConnectScreen(); // ♾️ Connect (AI Matchmaking)
+        break;
+      case 3:
+        currentScreen = const NvsLiveScreen(); // 📺 Live Section
+        break;
+      case 4:
+        currentScreen = const GlobalChatPage(); // 💬 Messages (Universal DM)
+        break;
+      case 5:
+        currentScreen = const SearchPage(); // 🔍 Search
+        break;
+      default:
+        currentScreen = const GridPage();
+    }
+
+    return currentScreen;
+  }
+}

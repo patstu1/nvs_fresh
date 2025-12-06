@@ -1,0 +1,232 @@
+/* First include Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mobile optimization */
+@layer utilities {
+  .momentum-scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .no-bounce {
+    overscroll-behavior: none;
+  }
+  
+  .content-stretch {
+    contain: content;
+  }
+  
+  .hardware-accelerated {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+  
+  .backdrop-blur-optimized {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    -ms-overflow-style: none;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Define animations */
+@keyframes pulse {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 0.6;
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+  }
+}
+
+@keyframes icon-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes neon-border-pulse {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes hologram-shift {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+
+@keyframes crystal-shimmer {
+  0% { background-position: 200% 0 }
+  100% { background-position: -200% 0 }
+}
+
+/* Add specific styles for bottom navigation */
+.nav-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(75, 239, 224, 0.3);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.nav-icon {
+  filter: drop-shadow(0 0 8px rgba(75, 239, 224, 0.6));
+  transition: all 0.3s ease;
+}
+
+.nav-icon.active {
+  filter: drop-shadow(0 0 14px rgba(75, 239, 224, 0.9)) brightness(1.4);
+}
+
+.nav-text {
+  transition: all 0.3s ease;
+}
+
+.nav-text.active {
+  text-shadow: 0 0 10px rgba(75, 239, 224, 0.9);
+}
+
+/* Increased padding to ensure there's space for both navbar AND symbol toolbar */
+.content-area {
+  padding-bottom: 160px !important; 
+}
+
+/* Main content pages should also have increased padding */
+.app-main-content {
+  padding-bottom: 160px !important;
+}
+
+/* Hide navigation on scroll down, show on scroll up */
+.scrolling-down .nav-container {
+  transform: translateY(100%);
+}
+
+.scrolling-up .nav-container {
+  transform: translateY(0);
+}
+
+/* Luxury Theme Animations */
+@keyframes luxury-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.luxury-shimmer {
+  position: relative;
+}
+
+.luxury-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, 
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: luxury-shimmer 3s infinite linear;
+  pointer-events: none;
+}
+
+/* Fix for iOS momentum scroll issues */
+@supports (-webkit-touch-callout: none) {
+  .ios-scroll-fix {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+  }
+}
+
+/* CRITICAL: Symbol toolbar visibility helpers - Enhanced for maximum visibility */
+.symbol-toolbar-wrapper {
+  position: fixed !important;
+  bottom: 80px !important; /* Position above bottom navbar */
+  left: 0 !important;
+  right: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  pointer-events: none !important;
+  z-index: 9999 !important; /* Super high z-index to ensure it's on top */
+  padding-bottom: 10px !important;
+  width: 100% !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  height: 60px !important;
+  min-height: 60px !important;
+  background-color: transparent !important;
+}
+
+/* Make all toolbar children visible */
+.symbol-toolbar-wrapper > * {
+  pointer-events: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: flex !important;
+}
+
+/* Make toolbar container properly visible */
+.toolbar-container {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 9999 !important;
+  position: relative !important;
+  pointer-events: auto !important;
+}
+
+/* Added luxurious dark background overlay */
+.luxury-overlay {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(60, 56, 50, 0.7) 100%);
+}
+
+/* Updated button hover effects */
+.btn:hover {
+  box-shadow: 0 0 15px rgba(255, 209, 220, 0.5);
+}

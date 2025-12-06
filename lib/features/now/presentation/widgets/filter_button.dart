@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nvs/theme/nvs_palette.dart';
+import 'package:nvs/meatup_core.dart';
 // import 'package:nvs/nvs_icons.dart'; // Assuming custom icons are defined here
 
 class FilterButton extends StatelessWidget {
@@ -14,14 +14,14 @@ class FilterButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: NVSPalette.background.withValues(alpha: 0.7),
+          color: NVSColors.pureBlack.withValues(alpha: 0.7),
           shape: BoxShape.circle,
-          border: Border.all(color: NVSPalette.textTertiary),
-          boxShadow: NVSPalette.primaryGlow,
+          border: Border.all(color: NVSColors.dividerColor),
+          boxShadow: NVSColors.mintGlow,
         ),
         child: const Icon(
           Icons.tune, // Use built-in filter icon
-          color: NVSPalette.primary,
+          color: NVSColors.neonMint,
           size: 28,
         ),
       ),

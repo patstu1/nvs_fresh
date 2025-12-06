@@ -1,0 +1,22 @@
+# lib/features/connect/data/connect.graphql
+
+mutation GenerateAstroQuantumSignature($birthDate: ISO8601DateTime!, $birthLocation: String!) {
+  generateAstroQuantumSignature(birthDate: $birthDate, birthLocation: $birthLocation) {
+    success
+    # The backend will calculate the signature and store it in the user's vector profile in Pinecone.
+    # It doesn't need to return the signature itself, only confirmation.
+  }
+}
+
+query FindMatches($limit: Int!, $userLocation: String) {
+  findMatches(limit: $limit, userLocation: $userLocation) {
+    userProfile {
+      walletAddress
+      offChainData {
+        gridPhotoURL
+      }
+    }
+    score
+  }
+}
+

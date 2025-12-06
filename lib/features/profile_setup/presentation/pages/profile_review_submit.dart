@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nvs/features/profile_setup/domain/models/user_profile.dart';
 import '../../state/profile_setup_controller.dart';
-import 'package:nvs/meatup_core.dart';
-import 'package:nvs/theme/nvs_palette.dart';
+import 'package:nvs/meatup_core.dart' hide UserProfile;
 
 class ProfileReviewSubmit extends ConsumerStatefulWidget {
   const ProfileReviewSubmit({super.key});
@@ -36,7 +35,7 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
           backgroundColor: Colors.grey[900],
           title: const Text(
             'Profile Created!',
-            style: TextStyle(color: NVSPalette.secondaryDark),
+            style: TextStyle(color: NVSColors.avocadoGreen),
           ),
           content: const Text(
             'Welcome to NVS! Your profile has been created successfully.',
@@ -53,7 +52,7 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
               },
               child: const Text(
                 'Get Started',
-                style: TextStyle(color: NVSPalette.secondaryDark),
+                style: TextStyle(color: NVSColors.avocadoGreen),
               ),
             ),
           ],
@@ -78,7 +77,7 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
               style: TextStyle(
                 fontSize: 24,
                 fontFamily: 'MagdaCleanMono',
-                color: NVSPalette.secondaryDark,
+                color: NVSColors.avocadoGreen,
               ),
             ),
             const SizedBox(height: 12),
@@ -110,7 +109,7 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
                         'ROLE TAGS',
                         style: TextStyle(
                           fontFamily: 'MagdaCleanMono',
-                          color: NVSPalette.secondaryDark,
+                          color: NVSColors.avocadoGreen,
                           fontSize: 14,
                         ),
                       ),
@@ -127,7 +126,7 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
                         'MOOD TAGS',
                         style: TextStyle(
                           fontFamily: 'MagdaCleanMono',
-                          color: NVSPalette.secondaryDark,
+                          color: NVSColors.avocadoGreen,
                           fontSize: 14,
                         ),
                       ),
@@ -144,7 +143,7 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
                         'TRAITS',
                         style: TextStyle(
                           fontFamily: 'MagdaCleanMono',
-                          color: NVSPalette.secondaryDark,
+                          color: NVSColors.avocadoGreen,
                           fontSize: 14,
                         ),
                       ),
@@ -161,7 +160,7 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
                         'PROFILE PHOTO',
                         style: TextStyle(
                           fontFamily: 'MagdaCleanMono',
-                          color: NVSPalette.secondaryDark,
+                          color: NVSColors.avocadoGreen,
                           fontSize: 14,
                         ),
                       ),
@@ -180,7 +179,7 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
                         'PRIVATE ALBUM',
                         style: TextStyle(
                           fontFamily: 'MagdaCleanMono',
-                          color: NVSPalette.secondaryDark,
+                          color: NVSColors.avocadoGreen,
                           fontSize: 14,
                         ),
                       ),
@@ -203,7 +202,7 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
               child: ElevatedButton(
                 onPressed: _isSubmitting ? null : _submitProfile,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: NVSPalette.secondaryDark,
+                  backgroundColor: NVSColors.avocadoGreen,
                   foregroundColor: Colors.black,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
@@ -242,7 +241,7 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
           label.toUpperCase(),
           style: const TextStyle(
             fontFamily: 'MagdaCleanMono',
-            color: NVSPalette.neonGreen,
+            color: NVSColors.neonGreen,
             fontSize: 12,
           ),
         ),
@@ -263,14 +262,14 @@ class _ProfileReviewSubmitState extends ConsumerState<ProfileReviewSubmit> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: NVSPalette.neonGreen.withValues(alpha: 0.2),
-        border: Border.all(color: NVSPalette.neonGreen),
+        color: NVSColors.neonGreen.withValues(alpha: 0.2),
+        border: Border.all(color: NVSColors.neonGreen),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Text(
         tag,
         style: const TextStyle(
-          color: NVSPalette.neonGreen,
+          color: NVSColors.neonGreen,
           fontSize: 12,
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nvs/meatup_core.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:nvs/theme/nvs_palette.dart';
 
 class UserProfileDrawer extends StatelessWidget {
   final UserProfile user;
@@ -18,7 +17,7 @@ class UserProfileDrawer extends StatelessWidget {
     return GestureDetector(
       onTap: onClose, // Tap outside to close
       child: Material(
-        color: NVSPalette.transparent,
+        color: Colors.transparent,
         child: Align(
           alignment: Alignment.bottomCenter,
           child: GestureDetector(
@@ -27,10 +26,10 @@ class UserProfileDrawer extends StatelessWidget {
               height: 350,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: NVSPalette.background.withValues(alpha: 0.9),
+                color: NVSColors.pureBlack.withValues(alpha: 0.9),
                 border: const Border(
-                    top: BorderSide(color: NVSPalette.textTertiary)),
-                boxShadow: NVSPalette.primaryGlow,
+                    top: BorderSide(color: NVSColors.dividerColor)),
+                boxShadow: NVSColors.mintGlow,
               ),
               child: Column(
                 children: [
@@ -50,14 +49,14 @@ class UserProfileDrawer extends StatelessWidget {
                       // TODO: Navigate to full profile
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: NVSPalette.primary,
+                      backgroundColor: NVSColors.neonMint,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 40, vertical: 16),
                     ),
                     child: Text(
                       'VIEW PROFILE',
                       style: NvsTextStyles.label
-                          .copyWith(color: NVSPalette.background, fontSize: 14),
+                          .copyWith(color: NVSColors.pureBlack, fontSize: 14),
                     ),
                   )
                 ],

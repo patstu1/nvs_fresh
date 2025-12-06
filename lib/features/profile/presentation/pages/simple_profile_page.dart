@@ -1,10 +1,8 @@
 // lib/features/profile/presentation/pages/simple_profile_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:nvs/meatup_core.dart';
 import '../identity_core_view.dart';
-import '../../../core/theme/quantum_design_tokens.dart';
-import 'package:nvs/theme/nvs_palette.dart';
+import 'package:nvs/core/theme/quantum_design_tokens.dart';
 
 /// PROFILE - User profile management
 /// Enterprise-grade profile system with real data
@@ -15,8 +13,7 @@ class SimpleProfilePage extends StatefulWidget {
   State<SimpleProfilePage> createState() => _SimpleProfilePageState();
 }
 
-class _SimpleProfilePageState extends State<SimpleProfilePage>
-    with TickerProviderStateMixin {
+class _SimpleProfilePageState extends State<SimpleProfilePage> with TickerProviderStateMixin {
   late AnimationController _glowController;
   late Animation<double> _glowAnimation;
 
@@ -43,7 +40,7 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: NVSPalette.background,
+      backgroundColor: QuantumDesignTokens.pureBlack,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -73,11 +70,11 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
                 width: 4,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: NVSPalette.primary,
+                  color: QuantumDesignTokens.neonMint,
                   borderRadius: BorderRadius.circular(2),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                      color: NVSPalette.primary.withValues(
+                      color: QuantumDesignTokens.neonMint.withValues(
                         alpha: _glowAnimation.value * 0.6,
                       ),
                       blurRadius: 8,
@@ -94,11 +91,11 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
                     fontFamily: 'BellGothic',
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: NVSPalette.primary,
+                    color: QuantumDesignTokens.ultraLightMint,
                     letterSpacing: 2.0,
                     shadows: <Shadow>[
                       Shadow(
-                        color: NVSPalette.primary.withValues(
+                        color: QuantumDesignTokens.neonMint.withValues(
                           alpha: _glowAnimation.value * 0.8,
                         ),
                         blurRadius: 12,
@@ -112,24 +109,23 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          const IdentityCoreView(),
+                      builder: (BuildContext context) => const IdentityCoreView(),
                     ),
                   );
                 },
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: NVSPalette.surfaceDark,
+                    color: QuantumDesignTokens.cardBackground,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: NVSPalette.primary.withValues(alpha: 0.5),
+                      color: QuantumDesignTokens.neonMint.withValues(alpha: 0.5),
                       width: 2,
                     ),
                   ),
                   child: const Icon(
                     Icons.settings,
-                    color: NVSPalette.primary,
+                    color: QuantumDesignTokens.neonMint,
                     size: 24,
                   ),
                 ),
@@ -157,14 +153,14 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: NVSPalette.primary.withValues(
+                    color: QuantumDesignTokens.neonMint.withValues(
                       alpha: _glowAnimation.value * 0.8,
                     ),
                     width: 3,
                   ),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                      color: NVSPalette.primary.withValues(
+                      color: QuantumDesignTokens.neonMint.withValues(
                         alpha: _glowAnimation.value * 0.5,
                       ),
                       blurRadius: 20,
@@ -181,8 +177,11 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
             height: 120,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: NVSPalette.primary.withValues(alpha: 0.3),
-              border: Border.all(color: NVSPalette.primary, width: 2),
+              color: QuantumDesignTokens.neonMint.withValues(alpha: 0.3),
+              border: Border.all(
+                color: QuantumDesignTokens.neonMint,
+                width: 2,
+              ),
             ),
             child: const Center(
               child: Text(
@@ -191,7 +190,7 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
                   fontFamily: 'BellGothic',
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: NVSPalette.primary,
+                  color: QuantumDesignTokens.ultraLightMint,
                   letterSpacing: 2,
                 ),
               ),
@@ -205,9 +204,11 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
               width: 20,
               height: 20,
               decoration: BoxDecoration(
-                color: NVSPalette.primary,
+                color: QuantumDesignTokens.neonMint,
                 shape: BoxShape.circle,
-                border: Border.all(width: 3),
+                border: Border.all(
+                  width: 3,
+                ),
               ),
             ),
           ),
@@ -221,9 +222,11 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: NVSPalette.background,
+        color: QuantumDesignTokens.voidBlack,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: NVSPalette.primary.withValues(alpha: 0.3)),
+        border: Border.all(
+          color: QuantumDesignTokens.neonMint.withValues(alpha: 0.3),
+        ),
       ),
       child: const Column(
         children: <Widget>[
@@ -233,7 +236,7 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
               fontFamily: 'BellGothic',
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: NVSPalette.primary,
+              color: QuantumDesignTokens.ultraLightMint,
               letterSpacing: 1,
             ),
           ),
@@ -243,7 +246,7 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
             style: TextStyle(
               fontFamily: 'MagdaCleanMono',
               fontSize: 14,
-              color: NVSPalette.textSecondary,
+              color: QuantumDesignTokens.textSecondary,
             ),
           ),
           SizedBox(height: 16),
@@ -252,7 +255,7 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
             style: TextStyle(
               fontFamily: 'MagdaCleanMono',
               fontSize: 14,
-              color: NVSPalette.primary,
+              color: QuantumDesignTokens.ultraLightMint,
               height: 1.4,
             ),
             textAlign: TextAlign.center,
@@ -267,9 +270,11 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: NVSPalette.background,
+        color: QuantumDesignTokens.voidBlack,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: NVSPalette.primary.withValues(alpha: 0.3)),
+        border: Border.all(
+          color: QuantumDesignTokens.neonMint.withValues(alpha: 0.3),
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -291,7 +296,7 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
             fontFamily: 'BellGothic',
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: NVSPalette.primary,
+            color: QuantumDesignTokens.neonMint,
           ),
         ),
         const SizedBox(height: 4),
@@ -301,7 +306,7 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
             fontFamily: 'MagdaCleanMono',
             fontSize: 10,
             fontWeight: FontWeight.bold,
-            color: NVSPalette.textSecondary,
+            color: QuantumDesignTokens.textSecondary,
             letterSpacing: 1,
           ),
         ),
@@ -330,9 +335,13 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: _buildActionButton('SHARE PROFILE', Icons.share, () {
-              // Share profile
-            }),
+            child: _buildActionButton(
+              'SHARE PROFILE',
+              Icons.share,
+              () {
+                // Share profile
+              },
+            ),
           ),
         ],
       ),
@@ -345,14 +354,20 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
-          color: NVSPalette.primary.withValues(alpha: 0.1),
+          color: QuantumDesignTokens.neonMint.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: NVSPalette.primary),
+          border: Border.all(
+            color: QuantumDesignTokens.neonMint,
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(icon, color: NVSPalette.primary, size: 18),
+            Icon(
+              icon,
+              color: QuantumDesignTokens.neonMint,
+              size: 18,
+            ),
             const SizedBox(width: 8),
             Text(
               label,
@@ -360,7 +375,7 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
                 fontFamily: 'MagdaCleanMono',
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
-                color: NVSPalette.primary,
+                color: QuantumDesignTokens.neonMint,
                 letterSpacing: 0.5,
               ),
             ),
@@ -382,14 +397,14 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
     return Container(
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: NVSPalette.background,
+        color: QuantumDesignTokens.voidBlack,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: NVSPalette.primary.withValues(alpha: 0.3)),
+        border: Border.all(
+          color: QuantumDesignTokens.neonMint.withValues(alpha: 0.3),
+        ),
       ),
       child: Column(
-        children: settings.asMap().entries.map((
-          MapEntry<int, (String, IconData)> entry,
-        ) {
+        children: settings.asMap().entries.map((MapEntry<int, (String, IconData)> entry) {
           final int index = entry.key;
           final (String, IconData) setting = entry.value;
           final bool isLast = index == settings.length - 1;
@@ -400,24 +415,28 @@ class _SimpleProfilePageState extends State<SimpleProfilePage>
                 bottom: isLast
                     ? BorderSide.none
                     : BorderSide(
-                        color: NVSPalette.primary.withValues(alpha: 0.1),
+                        color: QuantumDesignTokens.neonMint.withValues(alpha: 0.1),
                       ),
               ),
             ),
             child: ListTile(
-              leading: Icon(setting.$2, color: NVSPalette.primary, size: 20),
+              leading: Icon(
+                setting.$2,
+                color: QuantumDesignTokens.neonMint,
+                size: 20,
+              ),
               title: Text(
                 setting.$1,
                 style: const TextStyle(
                   fontFamily: 'MagdaCleanMono',
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: NVSPalette.primary,
+                  color: QuantumDesignTokens.ultraLightMint,
                 ),
               ),
               trailing: const Icon(
                 Icons.chevron_right,
-                color: NVSPalette.textSecondary,
+                color: QuantumDesignTokens.textSecondary,
               ),
               onTap: () {
                 // Navigate to setting

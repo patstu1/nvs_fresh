@@ -1,7 +1,7 @@
 // lib/features/now/presentation/pages/now_view.dart
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:nvs/theme/nvs_palette.dart';
+import 'package:nvs/meatup_core.dart';
 
 enum NowViewState {
   GlobeIntro,
@@ -60,16 +60,16 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: NVSPalette.background,
+      backgroundColor: NVSColors.pureBlack,
       // We will build a new, minimal, holographic AppBar later.
       appBar: AppBar(
-        backgroundColor: NVSPalette.background,
+        backgroundColor: NVSColors.pureBlack,
         title: Text(
           'N O W',
           style: TextStyle(
             fontFamily: 'MagdaCleanMono',
             fontSize: 20,
-            color: NVSPalette.textSecondary,
+            color: NVSColors.secondaryText,
             letterSpacing: 4,
           ),
         ),
@@ -100,9 +100,9 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
           center: Alignment.center,
           radius: 1.5,
           colors: [
-            NVSPalette.surfaceDark.withValues(alpha: 0.3),
-            NVSPalette.background,
-            NVSPalette.background,
+            NVSColors.cardBackground.withValues(alpha: 0.3),
+            NVSColors.pureBlack,
+            NVSColors.pureBlack,
           ],
           stops: const [0.0, 0.7, 1.0],
         ),
@@ -139,21 +139,21 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
           center: const Alignment(-0.3, -0.3),
           radius: 0.8,
           colors: [
-            NVSPalette.primary.withValues(alpha: 0.8),
-            NVSPalette.secondary.withValues(alpha: 0.6),
-            NVSPalette.surfaceDark.withValues(alpha: 0.4),
-            NVSPalette.background.withValues(alpha: 0.9),
+            NVSColors.ultraLightMint.withValues(alpha: 0.8),
+            NVSColors.turquoiseNeon.withValues(alpha: 0.6),
+            NVSColors.cardBackground.withValues(alpha: 0.4),
+            NVSColors.pureBlack.withValues(alpha: 0.9),
           ],
           stops: const [0.0, 0.3, 0.7, 1.0],
         ),
         boxShadow: [
           BoxShadow(
-            color: NVSPalette.primary.withValues(alpha: 0.5),
+            color: NVSColors.ultraLightMint.withValues(alpha: 0.5),
             blurRadius: 30,
             spreadRadius: 10,
           ),
           BoxShadow(
-            color: NVSPalette.secondary.withValues(alpha: 0.3),
+            color: NVSColors.turquoiseNeon.withValues(alpha: 0.3),
             blurRadius: 50,
             spreadRadius: 20,
           ),
@@ -176,9 +176,9 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    NVSPalette.secondaryDark.withValues(alpha: 0.8),
-                    NVSPalette.secondaryDark.withValues(alpha: 0.2),
-                    NVSPalette.transparent,
+                    NVSColors.avocadoGreen.withValues(alpha: 0.8),
+                    NVSColors.avocadoGreen.withValues(alpha: 0.2),
+                    Colors.transparent,
                   ],
                 ),
               ),
@@ -202,9 +202,9 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  NVSPalette.transparent,
-                  NVSPalette.primary.withValues(alpha: 0.3),
-                  NVSPalette.transparent,
+                  Colors.transparent,
+                  NVSColors.ultraLightMint.withValues(alpha: 0.3),
+                  Colors.transparent,
                 ],
               ),
             ),
@@ -224,11 +224,11 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  NVSPalette.transparent,
-                  NVSPalette.primary.withValues(alpha: 0.3),
-                  NVSPalette.primary.withValues(alpha: 0.5),
-                  NVSPalette.primary.withValues(alpha: 0.3),
-                  NVSPalette.transparent,
+                  Colors.transparent,
+                  NVSColors.ultraLightMint.withValues(alpha: 0.3),
+                  NVSColors.ultraLightMint.withValues(alpha: 0.5),
+                  NVSColors.ultraLightMint.withValues(alpha: 0.3),
+                  Colors.transparent,
                 ],
               ),
             ),
@@ -266,11 +266,11 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
               height: 8,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: NVSPalette.secondaryDark.withValues(alpha: opacity),
+                color: NVSColors.avocadoGreen.withValues(alpha: opacity),
                 boxShadow: [
                   BoxShadow(
                     color:
-                        NVSPalette.secondaryDark.withValues(alpha: opacity * 0.5),
+                        NVSColors.avocadoGreen.withValues(alpha: opacity * 0.5),
                     blurRadius: 8,
                     spreadRadius: 2,
                   ),
@@ -293,9 +293,9 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            NVSPalette.background,
-            NVSPalette.surfaceDark.withValues(alpha: 0.3),
-            NVSPalette.background,
+            NVSColors.pureBlack,
+            NVSColors.cardBackground.withValues(alpha: 0.3),
+            NVSColors.pureBlack,
           ],
           stops: const [0.0, 0.5, 1.0],
         ),
@@ -310,7 +310,7 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                 children: [
                   Icon(
                     Icons.location_on,
-                    color: NVSPalette.secondaryDark,
+                    color: NVSColors.avocadoGreen,
                     size: 28,
                   ),
                   const SizedBox(width: 12),
@@ -320,7 +320,7 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                       fontFamily: 'MagdaCleanMono',
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
-                      color: NVSPalette.secondaryDark,
+                      color: NVSColors.avocadoGreen,
                       letterSpacing: 1.2,
                     ),
                   ),
@@ -329,10 +329,10 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: NVSPalette.secondary.withValues(alpha: 0.2),
+                      color: NVSColors.turquoiseNeon.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: NVSPalette.secondary.withValues(alpha: 0.5),
+                        color: NVSColors.turquoiseNeon.withValues(alpha: 0.5),
                       ),
                     ),
                     child: Text(
@@ -341,7 +341,7 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                         fontFamily: 'MagdaCleanMono',
                         fontSize: 10,
                         fontWeight: FontWeight.w600,
-                        color: NVSPalette.secondary,
+                        color: NVSColors.turquoiseNeon,
                       ),
                     ),
                   ),
@@ -355,20 +355,20 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: NVSPalette.surfaceDark.withValues(alpha: 0.5),
+                    color: NVSColors.cardBackground.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: NVSPalette.primary.withValues(alpha: 0.3),
+                      color: NVSColors.ultraLightMint.withValues(alpha: 0.3),
                       width: 1,
                     ),
-                    boxShadow: NVSPalette.primaryGlow,
+                    boxShadow: NVSColors.mintGlow,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.map_outlined,
-                        color: NVSPalette.primary.withValues(alpha: 0.6),
+                        color: NVSColors.ultraLightMint.withValues(alpha: 0.6),
                         size: 64,
                       ),
                       const SizedBox(height: 16),
@@ -378,7 +378,7 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                           fontFamily: 'MagdaCleanMono',
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: NVSPalette.primary,
+                          color: NVSColors.ultraLightMint,
                           letterSpacing: 1.0,
                         ),
                       ),
@@ -388,7 +388,7 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                         style: TextStyle(
                           fontFamily: 'MagdaCleanMono',
                           fontSize: 12,
-                          color: NVSPalette.textSecondary,
+                          color: NVSColors.secondaryText,
                         ),
                       ),
                     ],
@@ -411,8 +411,8 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                       icon: Icon(Icons.public, size: 18),
                       label: const Text('GLOBE VIEW'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: NVSPalette.secondaryDark,
-                        foregroundColor: NVSPalette.background,
+                        backgroundColor: NVSColors.avocadoGreen,
+                        foregroundColor: NVSColors.pureBlack,
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -427,7 +427,7 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: const Text('Location scan initiated...'),
-                            backgroundColor: NVSPalette.secondary,
+                            backgroundColor: NVSColors.turquoiseNeon,
                             behavior: SnackBarBehavior.floating,
                           ),
                         );
@@ -435,8 +435,8 @@ class _NowViewState extends State<NowView> with TickerProviderStateMixin {
                       icon: Icon(Icons.location_on, size: 18),
                       label: const Text('SCAN'),
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: NVSPalette.secondary,
-                        side: BorderSide(color: NVSPalette.secondary),
+                        foregroundColor: NVSColors.turquoiseNeon,
+                        side: BorderSide(color: NVSColors.turquoiseNeon),
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),

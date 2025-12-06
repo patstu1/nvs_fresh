@@ -1,0 +1,88 @@
+# lib/features/messenger/data/messenger.graphql
+
+# Query for getting all chat threads
+query GetChatThreads {
+  chatThreads {
+    id
+    participantWalletAddresses
+    lastMessage {
+      id
+      content
+      messageType
+      timestamp
+      senderWalletAddress
+    }
+    unreadCount
+  }
+}
+
+# Query for getting YOs sent to the current user
+query GetYoList {
+  yoList {
+    id
+    senderWalletAddress
+    senderProfile {
+      walletAddress
+      ipfsDataUri
+    }
+    timestamp
+    isRead
+  }
+}
+
+# Query for getting users who liked the current user
+query GetLikesList {
+  likesList {
+    id
+    likerWalletAddress
+    likerProfile {
+      walletAddress
+      ipfsDataUri
+    }
+    timestamp
+    isRead
+  }
+}
+
+# Mutation for sending a text message
+mutation SendMessage($threadId: String!, $content: String!, $messageType: MessageType!) {
+  sendMessage(threadId: $threadId, content: $content, messageType: $messageType) {
+    id
+    content
+    messageType
+    timestamp
+    senderWalletAddress
+  }
+}
+
+# Mutation for sending a YO
+mutation SendYo($receiverWalletAddress: String!) {
+  sendYo(receiverWalletAddress: $receiverWalletAddress) {
+    id
+    senderWalletAddress
+    receiverWalletAddress
+    timestamp
+  }
+}
+
+# Mutation for sending a like
+mutation SendLike($receiverWalletAddress: String!) {
+  sendLike(receiverWalletAddress: $receiverWalletAddress) {
+    id
+    likerWalletAddress
+    likedWalletAddress
+    timestamp
+  }
+}
+
+# Subscription for real-time messages in a thread
+subscription OnMessageAdded($threadId: String!) {
+  messageAdded(threadId: $threadId) {
+    id
+    content
+    messageType
+    timestamp
+    senderWalletAddress
+  }
+}
+

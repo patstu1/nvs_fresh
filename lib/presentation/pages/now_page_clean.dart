@@ -7,22 +7,20 @@ import '../widgets/now_user_bubble_widget.dart';
 import '../widgets/now_user_overlay_widget.dart';
 import '../widgets/ephemeral_chat.dart';
 import '../../data/now_mock_users.dart';
-import 'package:nvs/domain/models/now_user_model.dart';
+import '../../domain/models/now_user_model.dart';
 import '../../data/now_map_model.dart';
 import '../../presentation/widgets/map_filters_panel.dart';
-import 'package:nvs/theme/nvs_palette.dart';
 
 enum NowViewState { intro, mapLoading, mapLive, profileOpen }
 
-final nowStateProvider = NotifierProvider<NowController, NowViewState>(() {
+final nowStateProvider = StateNotifierProvider<NowController, NowViewState>((
+  ref,
+) {
   return NowController();
 });
 
-class NowController extends Notifier<NowViewState> {
-  @override
-  NowViewState build() {
-    return NowViewState.intro;
-  }
+class NowController extends StateNotifier<NowViewState> {
+  NowController() : super(NowViewState.intro);
 
   void completeIntro() {
     if (state == NowViewState.intro) {
@@ -88,7 +86,7 @@ class _NowViewState extends ConsumerState<NowView> {
 
     showBottomSheet(
       context: context,
-      backgroundColor: NVSPalette.transparent,
+      backgroundColor: Colors.transparent,
       builder: (context) => MapFiltersPanel(
         filters: initialFilters,
         onFiltersChanged: (newFilters) {
@@ -125,7 +123,7 @@ class _NowViewState extends ConsumerState<NowView> {
     final nowState = ref.watch(nowStateProvider);
 
     return Scaffold(
-      backgroundColor: NVSPalette.background,
+      backgroundColor: NVSColors.pureBlack,
       body: Stack(
         children: [
           // Main content based on state
@@ -158,7 +156,7 @@ class _NowViewState extends ConsumerState<NowView> {
               ),
             )
           : Container(
-              color: NVSPalette.background,
+              color: NVSColors.pureBlack,
               child: Center(
                 child: Text(
                   "🌍",
@@ -166,7 +164,7 @@ class _NowViewState extends ConsumerState<NowView> {
                     fontSize: 120,
                     shadows: [
                       Shadow(
-                        color: NVSPalette.primaryGlow.withValues(alpha: 0.8),
+                        color: NVSColors.primaryGlow.withValues(alpha: 0.8),
                         blurRadius: 20,
                       ),
                     ],
@@ -179,7 +177,7 @@ class _NowViewState extends ConsumerState<NowView> {
 
   Widget _buildMapLoading() {
     return Container(
-      color: NVSPalette.background,
+      color: NVSColors.pureBlack,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -190,7 +188,7 @@ class _NowViewState extends ConsumerState<NowView> {
                 fontSize: 80,
                 shadows: [
                   Shadow(
-                    color: NVSPalette.primaryGlow.withValues(alpha: 0.8),
+                    color: NVSColors.primaryGlow.withValues(alpha: 0.8),
                     blurRadius: 15,
                   ),
                 ],
@@ -200,12 +198,12 @@ class _NowViewState extends ConsumerState<NowView> {
             Text(
               "Loading live map...",
               style: TextStyle(
-                color: NVSPalette.primaryGlow,
+                color: NVSColors.primaryGlow,
                 fontSize: 18,
                 fontFamily: 'MagdaCleanMono',
                 shadows: [
                   Shadow(
-                    color: NVSPalette.primaryGlow.withValues(alpha: 0.5),
+                    color: NVSColors.primaryGlow.withValues(alpha: 0.5),
                     blurRadius: 8,
                   ),
                 ],
@@ -216,7 +214,7 @@ class _NowViewState extends ConsumerState<NowView> {
               width: 40,
               height: 40,
               child: CircularProgressIndicator(
-                color: NVSPalette.primaryGlow,
+                color: NVSColors.primaryGlow,
                 strokeWidth: 3,
               ),
             ),
@@ -228,7 +226,7 @@ class _NowViewState extends ConsumerState<NowView> {
 
   Widget _buildMapView() {
     return Container(
-      color: NVSPalette.background,
+      color: NVSColors.pureBlack,
       child: Stack(
         children: [
           // Simulated map background with radial gradient
@@ -238,8 +236,8 @@ class _NowViewState extends ConsumerState<NowView> {
                 center: Alignment.center,
                 radius: 1.5,
                 colors: [
-                  NVSPalette.primaryGlow.withValues(alpha: 0.1),
-                  NVSPalette.background,
+                  NVSColors.primaryGlow.withValues(alpha: 0.1),
+                  NVSColors.pureBlack,
                 ],
               ),
             ),
@@ -270,15 +268,15 @@ class _NowViewState extends ConsumerState<NowView> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: NVSPalette.surfaceDark,
+                color: NVSColors.cardBackground,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: NVSPalette.primaryGlow.withValues(alpha: 0.6),
+                  color: NVSColors.primaryGlow.withValues(alpha: 0.6),
                   width: 1,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: NVSPalette.primaryGlow.withValues(alpha: 0.2),
+                    color: NVSColors.primaryGlow.withValues(alpha: 0.2),
                     blurRadius: 8,
                     spreadRadius: 1,
                   ),
@@ -291,13 +289,11 @@ class _NowViewState extends ConsumerState<NowView> {
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: NVSPalette.secondaryDark,
+                      color: NVSColors.avocadoGreen,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: NVSPalette.secondaryDark.withValues(
-                            alpha: 0.6,
-                          ),
+                          color: NVSColors.avocadoGreen.withValues(alpha: 0.6),
                           blurRadius: 4,
                           spreadRadius: 1,
                         ),
@@ -308,7 +304,7 @@ class _NowViewState extends ConsumerState<NowView> {
                   Text(
                     "LIVE",
                     style: TextStyle(
-                      color: NVSPalette.primaryGlow,
+                      color: NVSColors.primaryGlow,
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'MagdaCleanMono',

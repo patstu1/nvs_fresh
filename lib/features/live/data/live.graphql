@@ -1,0 +1,19 @@
+# lib/features/live/data/live.graphql
+
+subscription OnProximitySphereUpdate($latitude: Float!, $longitude: Float!) {
+  proximitySphereUpdate(latitude: $latitude, longitude: $longitude) {
+    # The backend resolves the 200 closest users and sends their basic info
+    users {
+      walletAddress
+      ipfsDataUri # For avatar/photo
+    }
+    # Also sends any active chat messages within the sphere
+    messages {
+      id
+      senderWalletAddress
+      content
+      messageType
+    }
+  }
+}
+
