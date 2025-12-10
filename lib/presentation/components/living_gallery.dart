@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:nvs/meatup_core.dart';
 import '../../../data/models/vibe_lens_types.dart';
-import 'digital_canvas_tile.dart';
 import 'premium_tile.dart';
 
 /// The heart of MEATUP - renders the asymmetrical masonry grid

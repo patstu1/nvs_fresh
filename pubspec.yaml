@@ -163,37 +163,13 @@ flutter:
           weight: 700
         - asset: assets/fonts/bell-gothic-black-cufonfonts/ufonts.com_bell-gothic-light.ttf
           weight: 300
-    - family: Cyberpunk
-      fonts:
-        - asset: assets/fonts/Cyberpunk-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Cyberpunk-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Cyberpunk-Bold.ttf
-          weight: 700
-    - family: Futura
-      fonts:
-        - asset: assets/fonts/Futura-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Futura-Bold.ttf
-          weight: 700
     - family: MagdaCleanMono
       fonts:
         - asset: assets/fonts/magda clean mono font/MagdaCleanMonoPro.otf
           weight: 400
-    - family: Neon
-      fonts:
-        - asset: assets/fonts/Neon-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Neon-Bold.ttf
-          weight: 700
     - family: NVSLogo
       fonts:
         - asset: assets/fonts/NVS logo font.ttf
-          weight: 400
-    - family: Orbitron
-      fonts:
-        - asset: assets/fonts/Orbitron-Regular.ttf
           weight: 400
 
   # For details regarding fonts from package dependencies,

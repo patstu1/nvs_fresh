@@ -79,7 +79,7 @@ class _CruisingEventModalState extends ConsumerState<CruisingEventModal> {
 
           /// Event Type Selector
           DropdownButtonFormField<String>(
-            value: _selectedType,
+            initialValue: _selectedType,
             dropdownColor: Colors.black,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(

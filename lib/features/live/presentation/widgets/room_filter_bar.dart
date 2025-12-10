@@ -53,7 +53,7 @@ class RoomFilterBar extends StatelessWidget {
                   divisions: 100,
                   label: '${distance.toStringAsFixed(1)} km',
                   activeColor: const Color(0xFF08F3F0),
-                  inactiveColor: const Color(0xFFE4FFF0),
+                  inactiveColor: const Color(0xFFE2FFF4),
                   onChanged: (double v) => onChanged(distance: v),
                 ),
               ],

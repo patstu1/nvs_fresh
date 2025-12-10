@@ -13,7 +13,7 @@ class QuantumDesignTokens {
   // ============================================================================
 
   /// Core Brand Colors - Primary Identity
-  static const Color pureBlack = Color(0xFF000000);
+  static const Color pureBlack = Color(0xFF232901);
   static const Color voidBlack = Color(0xFF0A0A0A); // Deeper black for depths
   static const Color ultraLightMint = Color(0xFFE2FFF4); // Primary brand glow
   static const Color neonMint = Color(0xFF00FFA3); // Interactive elements
@@ -55,7 +55,7 @@ class QuantumDesignTokens {
   static const Color textTertiary = Color(0x66E2FFF4); // 40% opacity mint
   static const Color textDisabled = Color(0x44E2FFF4); // 26% opacity mint
   static const Color textOnDark = Color(0xFFFFFFFF);
-  static const Color textOnLight = Color(0xFF000000);
+  static const Color textOnLight = Color(0xFF232901);
 
   /// Status and Semantic Colors
   static const Color success = plasmaGreen;

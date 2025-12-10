@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nvs/meatup_core.dart';
-import 'package:nvs/theme/nvs_colors.dart';
 // import 'package:unity_widget/unity_widget.dart'; // Unity integration package
 import 'profile_info.dart';
 

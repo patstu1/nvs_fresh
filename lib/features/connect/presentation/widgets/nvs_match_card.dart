@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class NvsPalette {
   static const Color bg = Color(0xFF05080A);
   static const Color gridLine = Color(0xFF0C1C1C);
-  static const Color mint = Color(0xFFE4FFF0); // ultra-light neon mint
+  static const Color mint = Color(0xFFE2FFF4); // ultra-light neon mint
   static const Color cyan = Color(0xFF00F5FF); // neon cyan
   static const Color pink = Color(0xFFFF41D6); // neon pink
   static const Color lemon = Color(0xFFB8FF5C); // accent for charts (optional)

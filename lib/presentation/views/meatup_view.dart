@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
 import 'package:nvs/meatup_core.dart';
-import '../components/living_gallery.dart';
-import '../components/vibe_lens_ui.dart';
-import '../../data/providers/meatup_provider.dart';
 import '../../data/models/vibe_lens_types.dart';
 
 /// Main container screen for the MEATUP experience

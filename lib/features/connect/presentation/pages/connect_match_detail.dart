@@ -1,784 +1,873 @@
-import 'package:flutter/material.dart';
-import 'dart:math';
-import 'package:nvs/features/connect/presentation/synaptic_match_card.dart';
-import 'package:nvs/features/messenger/presentation/universal_messaging_sheet.dart';
+// NVS Connect Match Detail (Prompt 10)
+// Full profile view of a matched user with compatibility breakdown
+// Includes AI insights, conversation starters, and action buttons
 
-class ConnectMatchDetailPage extends StatelessWidget {
-  const ConnectMatchDetailPage({super.key});
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class ConnectMatchDetail extends StatefulWidget {
+  final String? userId;
+
+  const ConnectMatchDetail({super.key, this.userId});
+
+  @override
+  State<ConnectMatchDetail> createState() => _ConnectMatchDetailState();
+}
+
+class _ConnectMatchDetailState extends State<ConnectMatchDetail>
+    with TickerProviderStateMixin {
+  static const Color _mint = Color(0xFFE3F2DE);
+  static const Color _olive = Color(0xFF6B7F4A);
+  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _black = Color(0xFF000000);
+
+  late AnimationController _glowController;
+  late AnimationController _pulseController;
+  late PageController _photoController;
+  int _currentPhotoIndex = 0;
+
+  // Mock user data
+  final String _name = 'Alex';
+  final int _age = 28;
+  final String _position = 'Top';
+  final String _distance = '0.5 mi';
+  final int _compatibility = 94;
+  final String _bio = 'Adventure seeker and coffee enthusiast. Looking for genuine connections and good conversations. Let\'s grab a drink sometime.';
+  final List<String> _interests = ['Travel', 'Fitness', 'Coffee', 'Photography', 'Hiking'];
+  final List<String> _photos = ['1', '2', '3', '4'];
+  final bool _isOnline = true;
+  final String _lastActive = 'Online now';
+
+  // Compatibility breakdown
+  final Map<String, int> _compatibilityBreakdown = {
+    'Interests': 95,
+    'Lifestyle': 92,
+    'Preferences': 96,
+    'Values': 90,
+    'Communication': 88,
+  };
+
+  // AI Conversation Starters
+  final List<String> _conversationStarters = [
+    'Ask about their recent hiking trip',
+    'Share your favorite coffee spot',
+    'Talk about travel bucket lists',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _photoController = PageController();
+    _glowController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 3000),
+    )..repeat(reverse: true);
+    
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2000),
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _photoController.dispose();
+    _glowController.dispose();
+    _pulseController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: _black,
       body: Stack(
-        children: <Widget>[
-          // Subtle grid overlay
-          Positioned.fill(child: _CyberpunkGrid()),
-          // Main content
-          SafeArea(
-            child: SingleChildScrollView(
+        children: [
+          CustomScrollView(
+            slivers: [
+              _buildPhotoHeader(),
+              SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.all(20),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    const SizedBox(height: 12),
-                    // Synaptic neon match card with unified CTA
-                    SynapticMatchCard(
-                      leftImageUrl: 'assets/images/IMG_2217 2.jpg',
-                      rightImageUrl: 'assets/images/IMG_2223 2.jpg',
-                      matchPercent: 87,
-                      sharedInterests: const <String, double>{
-                        'values': 0.82,
-                        'music': 0.66,
-                        'nightlife': 0.58,
-                        'style': 0.74,
-                      },
-                      badges: const <String>['chemistry', 'signal', 'trust', 'kink'],
-                      onMessageNow: () {
-                        showModalBottomSheet<void>(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (BuildContext ctx) {
-                            return const UniversalMessagingSheet(
-                              section: MessagingSection.connect,
-                              targetUserId: 'connect_user_1',
-                              displayName: 'alex',
-                            );
-                          },
-                        );
-                      },
-                      titleTop: 'match details',
-                      primaryName: 'alex',
-                      secondaryName: 'jordan',
-                      verified: true,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildNameSection(),
+                      const SizedBox(height: 24),
+                      _buildCompatibilitySection(),
+                      const SizedBox(height: 24),
+                      _buildAIInsightsSection(),
+                      const SizedBox(height: 24),
+                      _buildBioSection(),
+                      const SizedBox(height: 24),
+                      _buildInterestsSection(),
+                      const SizedBox(height: 24),
+                      _buildConversationStarters(),
+                      const SizedBox(height: 100), // Space for bottom bar
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          _buildBottomActionBar(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPhotoHeader() {
+    return SliverAppBar(
+      expandedHeight: 400,
+      pinned: true,
+      backgroundColor: _black,
+      leading: GestureDetector(
+        onTap: () => Navigator.pop(context),
+        child: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: _black.withOpacity(0.5),
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(Icons.arrow_back, color: _mint),
+        ),
+      ),
+      actions: [
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: _black.withOpacity(0.5),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.more_vert, color: _mint),
+          ),
+        ),
+      ],
+      flexibleSpace: FlexibleSpaceBar(
+        background: Stack(
+          children: [
+            // Photo carousel
+            PageView.builder(
+              controller: _photoController,
+              onPageChanged: (index) => setState(() => _currentPhotoIndex = index),
+              itemCount: _photos.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  color: _mint.withOpacity(0.1),
+                  child: Icon(
+                    Icons.person,
+                    color: _mint.withOpacity(0.3),
+                    size: 100,
+                  ),
+                );
+              },
+            ),
+            // Photo indicators
+            Positioned(
+              bottom: 20,
+              left: 0,
+              right: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  _photos.length,
+                  (index) => Container(
+                    width: index == _currentPhotoIndex ? 24 : 8,
+                    height: 8,
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: index == _currentPhotoIndex
+                          ? _aqua
+                          : _mint.withOpacity(0.4),
                     ),
-                    const SizedBox(height: 28),
-                    // Comparison Metrics
-                    _ComparisonMetrics(),
-                    const SizedBox(height: 28),
-                    // AI Diagnostic Box
-                    _AIDiagnosticBox(),
-                    const SizedBox(height: 28),
-                    // Shared Interests & Data
-                    _SharedInterestsSection(),
-                    const SizedBox(height: 32),
-                    // AI Companion
-                    _AICompanion(),
-                    const SizedBox(height: 32),
-                    // Interaction Buttons (kept for additional actions)
-                    _InteractionButtons(),
-                  ],
+                  ),
+                ),
+              ),
+            ),
+            // Gradient overlay
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 100,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.transparent, _black],
                 ),
               ),
             ),
           ),
         ],
+        ),
       ),
     );
   }
-}
 
-// --- Cyberpunk Grid Overlay ---
-class _CyberpunkGrid extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _GridPainter(),
-    );
-  }
-}
-
-class _GridPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.04)
-      ..strokeWidth = 1;
-    const double gridSpacing = 36.0;
-    for (double x = 0; x < size.width; x += gridSpacing) {
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
-    }
-    for (double y = 0; y < size.height; y += gridSpacing) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-// --- Split Match Display ---
-class _SplitMatchDisplay extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        // Glowing split rings
-        SizedBox(
-          width: 180,
-          height: 180,
-          child: CustomPaint(
-            painter: _SplitRingPainter(),
+  Widget _buildNameSection() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    '$_name, $_age',
+                    style: const TextStyle(
+                      color: _mint,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  if (_isOnline)
+                    Container(
+                      width: 10,
+                      height: 10,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: _aqua,
+                      ),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Row(
+                children: [
+                  Text(
+                    _position,
+                    style: TextStyle(color: _olive, fontSize: 14),
+                  ),
+                  const SizedBox(width: 12),
+                  Icon(Icons.location_on, color: _olive, size: 14),
+                  Text(
+                    ' $_distance',
+                    style: TextStyle(color: _olive, fontSize: 14),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                _lastActive,
+                style: TextStyle(color: _aqua.withOpacity(0.8), fontSize: 12),
+              ),
+            ],
           ),
         ),
-        // Avatars
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _AvatarCircle(
-              image: 'https://randomuser.me/api/portraits/men/32.jpg',
-              glowColor: Colors.cyanAccent,
-              username: 'ALEX',
-              age: 29,
-              left: true,
-            ),
-            _AvatarCircle(
-              image: 'https://randomuser.me/api/portraits/men/45.jpg',
-              glowColor: Colors.pinkAccent,
-              username: 'JORDAN',
-              age: 31,
-              left: false,
+        // Large compatibility badge
+        AnimatedBuilder(
+          animation: _pulseController,
+          builder: (context, child) {
+            return Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: _aqua, width: 3),
+                boxShadow: [
+                  BoxShadow(
+                    color: _aqua.withOpacity(0.4 * _pulseController.value),
+                    blurRadius: 20,
+                    spreadRadius: 5,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '$_compatibility%',
+                      style: const TextStyle(
+                        color: _aqua,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      'match',
+                      style: TextStyle(color: _olive, fontSize: 10),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  // ============ COMPATIBILITY BREAKDOWN (Prompt 11) ============
+  Widget _buildCompatibilitySection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildSectionHeader('COMPATIBILITY'),
+            GestureDetector(
+              onTap: _showFullBreakdown,
+              child: Text(
+                'See details',
+                style: TextStyle(color: _aqua, fontSize: 12),
+              ),
             ),
           ],
         ),
-        // Top badge overlay
-        const Positioned(
-          top: 0,
-          child: _CompatibilityBadge(
-            percent: 87,
-            aiRank: 'HIGH',
-            color: Colors.greenAccent,
+        const SizedBox(height: 16),
+        ..._compatibilityBreakdown.entries.map((entry) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: _buildCompatibilityBar(entry.key, entry.value),
+          );
+        }),
+      ],
+    );
+  }
+
+  Widget _buildCompatibilityBar(String label, int value) {
+    final color = value >= 90 ? _aqua : (value >= 80 ? _mint : _olive);
+    
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              label,
+              style: TextStyle(color: _mint.withOpacity(0.8), fontSize: 13),
+            ),
+            Text(
+              '$value%',
+              style: TextStyle(
+                color: color,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(
+            value: value / 100,
+            backgroundColor: _olive.withOpacity(0.2),
+            valueColor: AlwaysStoppedAnimation(color),
+            minHeight: 6,
           ),
         ),
       ],
     );
   }
-}
 
-class _SplitRingPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Offset center = Offset(size.width / 2, size.height / 2);
-    final Paint paintLeft = Paint()
-      ..color = Colors.cyanAccent.withValues(alpha: 0.7)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 6
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
-    final Paint paintRight = Paint()
-      ..color = Colors.pinkAccent.withValues(alpha: 0.7)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 6
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: 80),
-      pi / 2,
-      pi,
-      false,
-      paintLeft,
-    );
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: 80),
-      -pi / 2,
-      pi,
-      false,
-      paintRight,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-class _AvatarCircle extends StatelessWidget {
-  const _AvatarCircle({
-    required this.image,
-    required this.glowColor,
-    required this.username,
-    required this.age,
-    required this.left,
-  });
-  final String image;
-  final Color glowColor;
-  final String username;
-  final int age;
-  final bool left;
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildAIInsightsSection() {
     return Container(
-      margin: EdgeInsets.only(left: left ? 0 : 12, right: left ? 12 : 0),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: _aqua.withOpacity(0.4)),
+        gradient: LinearGradient(
+          colors: [_aqua.withOpacity(0.1), Colors.transparent],
+        ),
+      ),
       child: Column(
-        children: <Widget>[
-          DecoratedBox(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: glowColor.withValues(alpha: 0.7),
-                  blurRadius: 32,
-                  spreadRadius: 8,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.auto_awesome, color: _aqua, size: 18),
+              const SizedBox(width: 8),
+              const Text(
+                'NVS INSIGHT',
+                style: TextStyle(
+                  color: _aqua,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1,
                 ),
-              ],
-            ),
-            child: CircleAvatar(
-              radius: 44,
-              backgroundImage: NetworkImage(image),
-            ),
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           Text(
-            '$username, $age',
+            '"$_name shares your love for adventure and values genuine connections. Their communication style aligns well with yours. High potential for meaningful conversations."',
             style: TextStyle(
-              color: glowColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              letterSpacing: 1.2,
+              color: _mint.withOpacity(0.9),
+              fontSize: 14,
+              fontStyle: FontStyle.italic,
+              height: 1.5,
             ),
           ),
         ],
       ),
     );
   }
-}
 
-class _CompatibilityBadge extends StatelessWidget {
-  const _CompatibilityBadge({required this.percent, required this.aiRank, required this.color});
-  final int percent;
-  final String aiRank;
-  final Color color;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.18),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: color, width: 2),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: color.withValues(alpha: 0.4),
-            blurRadius: 16,
-            spreadRadius: 2,
+  Widget _buildBioSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionHeader('ABOUT'),
+        const SizedBox(height: 12),
+        Text(
+          _bio,
+          style: TextStyle(
+            color: _mint.withOpacity(0.85),
+            fontSize: 15,
+            height: 1.6,
           ),
-        ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildInterestsSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionHeader('INTERESTS'),
+        const SizedBox(height: 12),
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: _interests.map((interest) {
+            final isShared = ['Travel', 'Coffee', 'Hiking'].contains(interest);
+    return Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: isShared ? _aqua : _olive.withOpacity(0.4),
+                ),
+                color: isShared ? _aqua.withOpacity(0.15) : Colors.transparent,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
+                children: [
+                  if (isShared) ...[
+                    Icon(Icons.check, color: _aqua, size: 14),
+                    const SizedBox(width: 6),
+                  ],
           Text(
-            '$percent%',
+                    interest,
             style: TextStyle(
-              color: color,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-          ),
-          const SizedBox(width: 10),
-          Text(
-            'Potential: $aiRank',
-            style: TextStyle(
-              color: color,
-              fontWeight: FontWeight.w600,
-              fontSize: 15,
+                      color: isShared ? _aqua : _mint.withOpacity(0.7),
+                      fontSize: 13,
             ),
           ),
         ],
       ),
+            );
+          }).toList(),
+        ),
+      ],
     );
-  }
 }
 
-// --- Comparison Metrics ---
-class _ComparisonMetrics extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildConversationStarters() {
     return Column(
-      children: <Widget>[
-        const _MetricBar(
-          label: 'Communication',
-          left: 'Direct',
-          right: 'Passive',
-          value: 0.7,
-          color: Colors.cyanAccent,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(Icons.lightbulb_outline, color: _aqua, size: 18),
+            const SizedBox(width: 8),
+            _buildSectionHeader('CONVERSATION STARTERS'),
+          ],
         ),
-        const _MetricBar(
-          label: 'Attachment',
-          left: 'Secure',
-          right: 'Anxious',
-          value: 0.5,
-          color: Colors.pinkAccent,
-        ),
-        const _MetricBar(
-          label: 'Sexual Compatibility',
-          left: 'High',
-          right: 'Low',
-          value: 0.85,
-          color: Colors.amberAccent,
-        ),
-        const _MetricBar(
-          label: 'Emotional Sync',
-          left: 'High',
-          right: 'Low',
-          value: 0.62,
-          color: Colors.purpleAccent,
-        ),
-        const _MetricBar(
-          label: 'Lifestyle Rhythm',
-          left: 'Night',
-          right: 'Day',
-          value: 0.3,
-          color: Colors.greenAccent,
-        ),
-        const _MetricBar(
-          label: 'Zodiac',
-          left: '♎',
-          right: '♈',
-          value: 0.9,
-          color: Colors.blueAccent,
-        ),
-        const SizedBox(height: 18),
-        _MiniBarChart(),
+        const SizedBox(height: 12),
+        ..._conversationStarters.map((starter) {
+          return GestureDetector(
+            onTap: () {
+              HapticFeedback.selectionClick();
+              // Copy to clipboard or start chat
+            },
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: _olive.withOpacity(0.3)),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      starter,
+                      style: TextStyle(
+                        color: _mint.withOpacity(0.85),
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                  Icon(Icons.send, color: _aqua, size: 18),
+                ],
+              ),
+            ),
+          );
+        }),
       ],
     );
   }
-}
 
-class _MetricBar extends StatelessWidget {
-  const _MetricBar({
-    required this.label,
-    required this.left,
-    required this.right,
-    required this.value,
-    required this.color,
-  });
-  final String label;
-  final String left;
-  final String right;
-  final double value;
-  final Color color;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(left, style: TextStyle(color: color, fontSize: 12)),
-              Text(
-                label,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
-                ),
-              ),
-              Text(right, style: TextStyle(color: color, fontSize: 12)),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Stack(
-            children: <Widget>[
-              Container(
-                height: 12,
+  Widget _buildBottomActionBar() {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        padding: EdgeInsets.fromLTRB(
+          20,
+          16,
+          20,
+          16 + MediaQuery.of(context).padding.bottom,
+        ),
+        decoration: BoxDecoration(
+          color: _black,
+          border: Border(top: BorderSide(color: _mint.withOpacity(0.1))),
+        ),
+        child: Row(
+          children: [
+            // Pass button
+            GestureDetector(
+              onTap: () {
+                HapticFeedback.lightImpact();
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 50,
+                height: 50,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: color.withValues(alpha: 0.18),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: _olive.withOpacity(0.5)),
                 ),
+                child: Icon(Icons.close, color: _olive, size: 24),
               ),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 800),
-                height: 12,
-                width: MediaQuery.of(context).size.width * 0.8 * value,
+            ),
+            const SizedBox(width: 16),
+            // Message button
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  HapticFeedback.mediumImpact();
+                  // Open chat
+                },
+                child: AnimatedBuilder(
+                  animation: _glowController,
+                  builder: (context, child) {
+                    return Container(
+                      height: 50,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  gradient: LinearGradient(
-                    colors: <Color>[color, Colors.white.withValues(alpha: 0.2)],
-                  ),
-                  boxShadow: <BoxShadow>[
+                        color: _aqua,
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: [
                     BoxShadow(
-                      color: color.withValues(alpha: 0.4),
-                      blurRadius: 8,
-                      spreadRadius: 1,
+                            color: _aqua.withOpacity(0.4 * _glowController.value),
+                            blurRadius: 15,
+                            spreadRadius: 2,
                     ),
                   ],
                 ),
-              ),
-            ],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.chat_bubble, color: _black, size: 20),
+                          SizedBox(width: 8),
+                          Text(
+                            'MESSAGE',
+                            style: TextStyle(
+                              color: _black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 1,
+                            ),
           ),
         ],
       ),
     );
-  }
-}
-
-class _MiniBarChart extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final List<double> bars = <double>[0.7, 0.5, 0.9];
-    final List<String> labels = <String>['Values', 'Music', 'Nightlife'];
-    final List<MaterialAccentColor> colors = <MaterialAccentColor>[
-      Colors.cyanAccent,
-      Colors.pinkAccent,
-      Colors.amberAccent,
-    ];
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(bars.length, (int i) {
-        return Column(
-          children: <Widget>[
-            Container(
-              width: 18,
-              height: 54,
-              alignment: Alignment.bottomCenter,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 800),
-                height: 54 * bars[i],
-                width: 18,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  gradient: LinearGradient(
-                    colors: <Color>[colors[i], Colors.white.withValues(alpha: 0.2)],
-                  ),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: colors[i].withValues(alpha: 0.4),
-                      blurRadius: 8,
-                      spreadRadius: 1,
-                    ),
-                  ],
+                  },
                 ),
               ),
             ),
-            const SizedBox(height: 6),
-            Text(labels[i], style: TextStyle(color: colors[i], fontSize: 11)),
+            const SizedBox(width: 16),
+            // Like button
+            GestureDetector(
+              onTap: () {
+                HapticFeedback.heavyImpact();
+                // Like user
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: _aqua),
+                  color: _aqua.withOpacity(0.15),
+                ),
+                child: const Icon(Icons.favorite, color: _aqua, size: 24),
+              ),
+            ),
           ],
-        );
-      }),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionHeader(String text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: _olive,
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 1,
+      ),
+    );
+  }
+
+  void _showFullBreakdown() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: _black,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.7,
+        minChildSize: 0.5,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) {
+          return _CompatibilityBreakdownSheet(
+            compatibility: _compatibility,
+            breakdown: _compatibilityBreakdown,
+            scrollController: scrollController,
+          );
+        },
+      ),
     );
   }
 }
 
-// --- AI Diagnostic Box ---
-class _AIDiagnosticBox extends StatelessWidget {
+// ============ FULL COMPATIBILITY BREAKDOWN SHEET (Prompt 11) ============
+class _CompatibilityBreakdownSheet extends StatelessWidget {
+  static const Color _mint = Color(0xFFE3F2DE);
+  static const Color _olive = Color(0xFF6B7F4A);
+  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _black = Color(0xFF000000);
+
+  final int compatibility;
+  final Map<String, int> breakdown;
+  final ScrollController scrollController;
+
+  const _CompatibilityBreakdownSheet({
+    required this.compatibility,
+    required this.breakdown,
+    required this.scrollController,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8),
-      padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.7),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: Colors.amberAccent, width: 2),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.amberAccent.withValues(alpha: 0.18),
-            blurRadius: 16,
-            spreadRadius: 2,
+        color: _black,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        border: Border.all(color: _mint.withOpacity(0.1)),
+      ),
+      child: ListView(
+        controller: scrollController,
+        padding: const EdgeInsets.all(24),
+        children: [
+          // Handle
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: _olive.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          // Title
+          const Text(
+            'COMPATIBILITY BREAKDOWN',
+            style: TextStyle(
+              color: _mint,
+              fontSize: 18,
+              fontWeight: FontWeight.w300,
+              letterSpacing: 3,
+            ),
+          ),
+          const SizedBox(height: 24),
+          // Overall score
+          _buildOverallScore(),
+          const SizedBox(height: 32),
+          // Detailed breakdown
+          ...breakdown.entries.map((entry) => _buildDetailedCategory(entry.key, entry.value)),
+          const SizedBox(height: 24),
+          // Explanation
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: _olive.withOpacity(0.3)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.info_outline, color: _olive, size: 16),
+                    const SizedBox(width: 8),
+                    Text(
+                      'HOW IS THIS CALCULATED?',
+                      style: TextStyle(
+                        color: _olive,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'NVS AI analyzes multiple dimensions of compatibility including shared interests, lifestyle preferences, relationship goals, communication patterns, and core values. Each category is weighted based on what matters most to successful connections.',
+                  style: TextStyle(
+                    color: _mint.withOpacity(0.7),
+                    fontSize: 13,
+                    height: 1.5,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildOverallScore() {
+    return Center(
+      child: Column(
+        children: [
+          Container(
+            width: 120,
+            height: 120,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: _aqua, width: 4),
+              boxShadow: [
+                BoxShadow(
+                  color: _aqua.withOpacity(0.3),
+                  blurRadius: 30,
+                  spreadRadius: 5,
+                ),
+              ],
+            ),
+            child: Center(
+              child: Text(
+                '$compatibility%',
+                style: const TextStyle(
+                  color: _aqua,
+                  fontSize: 36,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Overall Compatibility',
+            style: TextStyle(color: _olive, fontSize: 14),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailedCategory(String category, int score) {
+    final color = score >= 90 ? _aqua : (score >= 80 ? _mint : _olive);
+    final descriptions = {
+      'Interests': 'Shared hobbies and passions',
+      'Lifestyle': 'Daily habits and life approach',
+      'Preferences': 'Dating and relationship preferences',
+      'Values': 'Core beliefs and priorities',
+      'Communication': 'Conversation and expression style',
+    };
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Row(
-            children: <Widget>[
-              Icon(
-                Icons.warning_amber_rounded,
-                color: Colors.amberAccent,
-                size: 22,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    category,
+                    style: const TextStyle(
+                      color: _mint,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    descriptions[category] ?? '',
+                    style: TextStyle(color: _olive, fontSize: 11),
+                  ),
+                ],
               ),
-              SizedBox(width: 8),
-              Text(
-                'AI Insight',
-                style: TextStyle(
-                  color: Colors.amberAccent,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: color.withOpacity(0.15),
+                  border: Border.all(color: color.withOpacity(0.4)),
+                ),
+                child: Text(
+                  '$score%',
+                  style: TextStyle(
+                    color: color,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10),
-          const Text(
-            'This user’s emotional pattern mirrors yours closely. Suggested approach: flirty, but low-pressure. Estimated relationship sync: 84%.',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontFamily: 'SpaceGrotesk',
-            ),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.amberAccent,
-              foregroundColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              textStyle: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            onPressed: () {},
-            child: const Text('Expand Compatibility Report'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// --- Shared Interests & Data ---
-class _SharedInterestsSection extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            _DonutChart(percent: 0.82),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _CategoryChip(label: 'Vibes', color: Colors.cyanAccent),
-                _CategoryChip(label: 'Kinks', color: Colors.pinkAccent),
-                _CategoryChip(label: 'Mood', color: Colors.amberAccent),
-                _CategoryChip(label: 'Style', color: Colors.greenAccent),
-                _CategoryChip(label: 'Travel', color: Colors.purpleAccent),
-                _CategoryChip(label: 'Astrology', color: Colors.blueAccent),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(height: 18),
-        Text(
-          'Aesthetic alignment with their Instagram is 92%',
-          style: TextStyle(color: Colors.white70, fontSize: 13),
-        ),
-        SizedBox(height: 12),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            _CompatIcon(
-              icon: Icons.science,
-              label: 'DNA Match',
-              color: Colors.cyanAccent,
-            ),
-            _CompatIcon(
-              icon: Icons.flash_on,
-              label: 'Mood Sync',
-              color: Colors.amberAccent,
-            ),
-            _CompatIcon(
-              icon: Icons.balance,
-              label: 'Star Sign',
-              color: Colors.purpleAccent,
-            ),
-            _CompatIcon(
-              icon: Icons.psychology,
-              label: 'Comm. Freq',
-              color: Colors.greenAccent,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class _DonutChart extends StatelessWidget {
-  const _DonutChart({required this.percent});
-  final double percent;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 90,
-      height: 90,
-      child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          ShaderMask(
-            shaderCallback: (Rect rect) => const SweepGradient(
-              colors: <Color>[
-                Colors.cyanAccent,
-                Colors.pinkAccent,
-                Colors.amberAccent,
-                Colors.greenAccent,
-                Colors.cyanAccent,
-              ],
-              stops: <double>[0.0, 0.3, 0.6, 0.85, 1.0],
-            ).createShader(rect),
-            child: CircularProgressIndicator(
-              value: percent,
-              strokeWidth: 12,
-              backgroundColor: Colors.white12,
-              valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-            ),
-          ),
-          Text(
-            '${(percent * 100).toStringAsFixed(1)}%',
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: score / 100,
+              backgroundColor: _olive.withOpacity(0.2),
+              valueColor: AlwaysStoppedAnimation(color),
+              minHeight: 8,
             ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class _CategoryChip extends StatelessWidget {
-  const _CategoryChip({required this.label, required this.color});
-  final String label;
-  final Color color;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 2),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.18),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color, width: 1.2),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: color,
-          fontWeight: FontWeight.w600,
-          fontSize: 12,
-        ),
-      ),
-    );
-  }
-}
-
-class _CompatIcon extends StatelessWidget {
-  const _CompatIcon({required this.icon, required this.label, required this.color});
-  final IconData icon;
-  final String label;
-  final Color color;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Icon(icon, color: color, size: 28),
-        const SizedBox(height: 4),
-        Text(label, style: TextStyle(color: color, fontSize: 11)),
-      ],
-    );
-  }
-}
-
-// --- AI Companion ---
-class _AICompanion extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.7),
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: Colors.cyanAccent, width: 1.5),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: Colors.cyanAccent.withValues(alpha: 0.18),
-                blurRadius: 12,
-                spreadRadius: 1,
-              ),
-            ],
-          ),
-          child: const Row(
-            children: <Widget>[
-              Icon(Icons.android, color: Colors.cyanAccent, size: 32),
-              SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'NEON',
-                    style: TextStyle(
-                      color: Colors.cyanAccent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                  SizedBox(height: 2),
-                  Text(
-                    'Would you like to learn what makes this match so rare?',
-                    style: TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// --- Interaction Buttons ---
-class _InteractionButtons extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        _ActionButton(
-          label: 'Message Now',
-          icon: Icons.chat_bubble_outline,
-          color: Colors.cyanAccent,
-        ),
-        _ActionButton(
-          label: 'Analyze Again',
-          icon: Icons.psychology,
-          color: Colors.amberAccent,
-        ),
-        _ActionButton(
-          label: 'Save Match',
-          icon: Icons.bookmark_outline,
-          color: Colors.greenAccent,
-        ),
-        _ActionButton(
-          label: 'Next',
-          icon: Icons.refresh,
-          color: Colors.pinkAccent,
-        ),
-      ],
-    );
-  }
-}
-
-class _ActionButton extends StatelessWidget {
-  const _ActionButton({required this.label, required this.icon, required this.color});
-  final String label;
-  final IconData icon;
-  final Color color;
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-        foregroundColor: Colors.black,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-        textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-        elevation: 8,
-        shadowColor: color.withValues(alpha: 0.4),
-      ),
-      onPressed: () {},
-      icon: Icon(icon, size: 18),
-      label: Text(label),
     );
   }
 }

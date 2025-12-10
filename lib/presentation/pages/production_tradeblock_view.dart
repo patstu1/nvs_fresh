@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nvs/meatup_core.dart';
 import '../widgets/neon_profile_card.dart';
-import '../widgets/cyberpunk_filter_bar.dart';
 import '../../data/grid_provider.dart';
 import '../components/universal_messaging_sheet.dart';
 

@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../core/widgets/app_shell.dart';
 import '../../navigation/main_navigation_page.dart';
 import 'package:nvs/presentation/views/grid_view.dart' show GridViewWidget;
 import '../../features/now/presentation/pages/now_map_hub.dart' show NowMapHubView;
@@ -22,7 +21,7 @@ import '../../features/connect/presentation/pages/connect_heatmap_page.dart'
 import '../../features/connect/presentation/pages/connect_verdict_page.dart'
     show ConnectVerdictPage;
 import '../../features/connect/presentation/pages/connect_match_detail.dart'
-    show ConnectMatchDetailPage;
+    show ConnectMatchDetail;
 import '../../features/connect/presentation/pages/match_canvas.dart' show MatchCanvas;
 import '../../features/connect/presentation/screens/nvs_chosen_mates_vault_screen.dart'
     show NvsChosenMatesVaultScreen;
@@ -33,6 +32,8 @@ import '../../features/messenger/presentation/universal_messenger_view.dart'
 import '../../features/search/presentation/views/search_view.dart';
 import '../../features/profile/presentation/views/profile_view.dart' show ProfileView;
 import '../../features/profile/presentation/pages/profile_page.dart' show ProfilePage;
+import '../../features/profile/presentation/pages/profile_setup_flow.dart' show ProfileSetupFlow;
+import '../../features/messaging/presentation/pages/message_hub.dart' show MessageHub;
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -107,7 +108,7 @@ final GoRouter appRouter = GoRouter(
             GoRoute(
               path: 'match/:id',
               builder: (BuildContext context, GoRouterState state) =>
-                  const ConnectMatchDetailPage(),
+                  ConnectMatchDetail(userId: state.pathParameters['id']),
             ),
             GoRoute(
               path: 'vault',
@@ -141,6 +142,32 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: '/profile/:id',
           builder: (BuildContext context, GoRouterState state) => const ProfilePage(),
+        ),
+        GoRoute(
+          path: '/profile-setup',
+          builder: (BuildContext context, GoRouterState state) => const ProfileSetupFlow(),
+        ),
+        GoRoute(
+          path: '/message-hub',
+          builder: (BuildContext context, GoRouterState state) {
+            final String? section = state.uri.queryParameters['section'];
+            int initialSection = 0;
+            switch (section) {
+              case 'meatmarket':
+                initialSection = 0;
+                break;
+              case 'tradeblock':
+                initialSection = 1;
+                break;
+              case 'lookout':
+                initialSection = 2;
+                break;
+              case 'connect':
+                initialSection = 3;
+                break;
+            }
+            return MessageHub(initialSection: initialSection);
+          },
         ),
       ],
     ),
@@ -200,6 +227,7 @@ class _EntryGateState extends State<EntryGate> {
   Future<void> _maybeRedirectToOnboarding() async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
+      // ignore: unused_local_variable
       final bool hasOnboarded = prefs.getBool('hasOnboarded') ?? false;
       if (!mounted) return;
 

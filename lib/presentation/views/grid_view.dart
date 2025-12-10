@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nvs/meatup_core.dart';
 import '../../data/user_grid_provider.dart';
-import '../widgets/grid_user_card_widget.dart';
 
 class GridViewWidget extends ConsumerWidget {
   const GridViewWidget({super.key});

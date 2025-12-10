@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nvs/meatup_core.dart';
 import 'package:nvs/core/theme/quantum_design_tokens.dart';
 
 class UserClusterBubble extends StatefulWidget {

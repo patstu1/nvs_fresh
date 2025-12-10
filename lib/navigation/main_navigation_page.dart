@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:nvs/presentation/views/meatup_view.dart' show MeatupView;
 import 'package:flutter/services.dart';
-import '../features/now/presentation/pages/now_map_hub.dart' show NowMapHubView;
-import '../features/connect/presentation/views/connect_view.dart' show ConnectViewWidget;
-import '../features/live/presentation/views/live_view.dart';
+import '../core/theme/nvs_colors.dart';
+
+// Main feature screens
+import '../features/meatmarket/presentation/pages/meat_market_grid.dart';
+import '../features/tradeblock/presentation/pages/tradeblock_map.dart';
+import '../features/connect/presentation/pages/connect_ai_dashboard_full.dart' show ConnectAIDashboardFull;
+import '../features/lookout/presentation/pages/lookout_camera_setup.dart';
 import '../features/messenger/presentation/universal_messenger_view.dart'
     show UniversalMessengerView;
 import '../features/search/presentation/views/search_view.dart';
 import '../features/profile/presentation/views/profile_view.dart' show ProfileView;
-import '../core/theme/nvs_colors.dart';
 // Removed mock imports; derive connect target from real users if needed
 // import '../features/connect/data/connect_ai_service.dart' as connect_ai; // not needed for dashboard entry
 
@@ -23,8 +25,7 @@ class MainNavigationPage extends StatefulWidget {
 }
 
 class _MainNavigationPageState extends State<MainNavigationPage> {
-  late int _currentIndex; // Set from initialIndex
-  String? _pendingNowQuery;
+  late int _currentIndex;
 
   @override
   void initState() {
@@ -35,75 +36,66 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
   void _onNavTap(int index) {
     setState(() {
       _currentIndex = index;
-      if (index == 1 && _pendingNowQuery != null) {
-        _screens[1] = NowMapHubView(
-          key: UniqueKey(),
-          initialQuery: _pendingNowQuery,
-          initialToast: 'explore mode: live 3d map',
-        );
-        _pendingNowQuery = null;
-      }
     });
     HapticFeedback.selectionClick();
   }
 
-  late final List<Widget> _screens = <Widget>[
-    // Temporarily use simple placeholders to debug
-    Container(color: Colors.red, child: const Center(child: Text('MEATRACK - Coming Soon', style: TextStyle(color: Colors.white)))),
-    Container(color: Colors.blue, child: const Center(child: Text('NOW - Coming Soon', style: TextStyle(color: Colors.white)))),
-    Container(color: Colors.green, child: const Center(child: Text('CONNECT - Coming Soon', style: TextStyle(color: Colors.white)))),
-    Container(color: Colors.yellow, child: const Center(child: Text('LIVE - Coming Soon', style: TextStyle(color: Colors.white)))),
-    Container(color: Colors.purple, child: const Center(child: Text('MESSAGES - Coming Soon', style: TextStyle(color: Colors.white)))),
-    Container(color: Colors.orange, child: const Center(child: Text('SEARCH - Coming Soon', style: TextStyle(color: Colors.white)))),
-    Container(color: Colors.pink, child: const Center(child: Text('PROFILE - Coming Soon', style: TextStyle(color: Colors.white)))),
+  List<Widget> get _screens => <Widget>[
+    const MeatMarketGrid(),                // 0: MEAT MARKET - Full grid with Vision mode
+    const TradeBlockMap(),                 // 1: TRADEBLOCK - Real-time cruising map
+    const ConnectAIDashboardFull(),        // 2: CONNECT - AI Dashboard with NVS hologram
+    const LookoutCameraSetup(),            // 3: LOOKOUT - Video rooms
+    const UniversalMessengerView(),        // 4: MESSAGES
+    const SearchViewWidget(),              // 5: SEARCH
+    const ProfileView(),                   // 6: PROFILE
   ];
 
-  // removed legacy connect stack builder; Connect opens to dashboard
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: NVSColors.pureBlack,
       body: SafeArea(child: IndexedStack(index: _currentIndex, children: _screens)),
-      // Temporarily disabled bottom navigation to debug
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: _currentIndex,
-      //   onTap: _onNavTap,
-      //   backgroundColor: NVSColors.pureBlack,
-      //   selectedItemColor: NVSColors.primaryLightMint,
-      //   unselectedItemColor: Colors.white54,
-      //   type: BottomNavigationBarType.fixed,
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.grid_view),
-      //       label: 'MEATRACK',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.location_on),
-      //       label: 'NOW',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.connect_without_contact),
-      //       label: 'CONNECT',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.live_tv),
-      //       label: 'LIVE',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.message),
-      //       label: 'MESSAGES',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.search),
-      //       label: 'SEARCH',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.person),
-      //       label: 'PROFILE',
-      //     ),
-      //   ],
-      // ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: _onNavTap,
+        backgroundColor: NVSColors.pureBlack,
+        selectedItemColor: NVSColors.primaryLightMint,
+        unselectedItemColor: Colors.white54,
+        type: BottomNavigationBarType.fixed,
+        selectedFontSize: 10,
+        unselectedFontSize: 9,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.grid_view),
+            label: 'MEAT',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.location_on),
+            label: 'TRADEBLOCK',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.psychology),
+            label: 'CONNECT',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.remove_red_eye),
+            label: 'LOOKOUT',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message),
+            label: 'MSGS',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'SEARCH',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'PROFILE',
+          ),
+        ],
+      ),
     );
   }
 }
@@ -250,3 +242,4 @@ class _GlowMaterialIconState extends State<_GlowMaterialIcon> {
     );
   }
 }
+

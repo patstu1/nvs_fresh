@@ -34,7 +34,7 @@ class _Cyberpunk3DGlobeState extends State<Cyberpunk3DGlobe>
   static const Color neonCyan = Color(0xFF00FFFF);
   static const Color neonGreen = Color(0xFF00FF88);
   static const Color neonPink = Color(0xFFFF0080);
-  static const Color deepBlack = Color(0xFF000000);
+  static const Color deepBlack = Color(0xFF232901);
 
   @override
   void initState() {
@@ -300,7 +300,7 @@ class CyberpunkGlobePainter extends CustomPainter {
   void _drawGlobeBase(Canvas canvas, Offset center, double radius) {
     // Inner dark sphere
     final basePaint = Paint()
-      ..color = const Color(0xFF000000)
+      ..color = const Color(0xFF232901)
       ..style = PaintingStyle.fill;
 
     canvas.drawCircle(center, radius, basePaint);
@@ -310,7 +310,7 @@ class CyberpunkGlobePainter extends CustomPainter {
       ..shader = RadialGradient(
         colors: [
           const Color(0xFF001122).withValues(alpha: 0.8),
-          const Color(0xFF000000),
+          const Color(0xFF232901),
         ],
         stops: const [0.0, 1.0],
       ).createShader(Rect.fromCircle(center: center, radius: radius));

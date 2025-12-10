@@ -10,7 +10,6 @@ import '../services/quantum_biometric_service.dart';
 import '../services/quantum_shader_service.dart';
 import '../services/zk_privacy_service.dart';
 import '../services/quantum_120fps_engine.dart' as fps120;
-import '../models/quantum_user_profile.dart';
 import '../models/app_types.dart'
     show AppSection, BioResponsiveThemeData;
 

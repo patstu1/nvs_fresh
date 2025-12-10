@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// NVS mint (extra light, ultra light neon mint)
-const Color nvsMint = Color(0xFFE4FFF0);
+const Color nvsMint = Color(0xFFE2FFF4);
 
 /// App-wide breathing animation duration
 const Duration nvsBreathDuration = Duration(milliseconds: 3600);
