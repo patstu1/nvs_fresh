@@ -16,9 +16,9 @@ class ConnectMatchDetail extends StatefulWidget {
 
 class _ConnectMatchDetailState extends State<ConnectMatchDetail>
     with TickerProviderStateMixin {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   late AnimationController _glowController;
@@ -665,9 +665,9 @@ class _ConnectMatchDetailState extends State<ConnectMatchDetail>
 
 // ============ FULL COMPATIBILITY BREAKDOWN SHEET (Prompt 11) ============
 class _CompatibilityBreakdownSheet extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   final int compatibility;

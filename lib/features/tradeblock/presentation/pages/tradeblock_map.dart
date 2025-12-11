@@ -731,9 +731,9 @@ class _MapPainter extends CustomPainter {
     required this.isCruising,
   }) : super(repaint: Listenable.merge([pulseAnimation, radarAnimation]));
 
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -788,9 +788,9 @@ class _ProfileCard extends StatelessWidget {
 
   const _ProfileCard({required this.cruiser});
 
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   @override
@@ -1015,9 +1015,9 @@ class _ProfileCard extends StatelessWidget {
 
 // Sidebar Menu
 class _SidebarMenu extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   @override
@@ -1135,9 +1135,9 @@ class _SidebarMenu extends StatelessWidget {
 
 // Filter Panel
 class _FilterPanel extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   @override
@@ -1255,9 +1255,9 @@ class _FilterPanel extends StatelessWidget {
 
 // Settings Menu
 class _SettingsMenu extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   @override
@@ -1382,9 +1382,9 @@ class _SettingsMenu extends StatelessWidget {
 
 // Travel Mode Overlay
 class _TravelModeOverlay extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   @override

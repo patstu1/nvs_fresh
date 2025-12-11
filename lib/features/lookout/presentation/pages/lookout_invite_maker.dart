@@ -22,9 +22,9 @@ class LookoutInviteMaker extends StatefulWidget {
 
 class _LookoutInviteMakerState extends State<LookoutInviteMaker>
     with TickerProviderStateMixin {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   late AnimationController _glowController;
@@ -723,7 +723,7 @@ class _NeonLinesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF20B2A6).withOpacity(0.3)
+      ..color = const Color(0xFFE4FFF0).withOpacity(0.3)
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke;
 

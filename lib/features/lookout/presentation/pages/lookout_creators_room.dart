@@ -15,9 +15,9 @@ class LookoutCreatorsRoom extends StatefulWidget {
 
 class _LookoutCreatorsRoomState extends State<LookoutCreatorsRoom>
     with TickerProviderStateMixin {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   late AnimationController _glowController;
@@ -498,4 +498,5 @@ class _CreatorUser {
     );
   }
 }
+
 

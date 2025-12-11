@@ -260,7 +260,7 @@ class _EntryGateState extends State<EntryGate> {
       case 'profile':
         return 6;
       default:
-        return 0; // default to MEATRACK grid section
+        return 0; // default to MEAT MARKET grid section
     }
   }
 

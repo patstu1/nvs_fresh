@@ -1,6 +1,7 @@
 // NVS Lookout Main Room (Prompt 35)
 // Main video chat room with grid view of live users
 // Up to 200 closest users, 6 pinnable spots, real-time video feeds
+// Music: Station Berlin Beachhouse always playing
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -15,10 +16,15 @@ class LookoutMainRoom extends StatefulWidget {
 
 class _LookoutMainRoomState extends State<LookoutMainRoom>
     with TickerProviderStateMixin {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  // Global NVS colors - mint and black only
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0); // Map to mint
+  static const Color _aqua = Color(0xFFE4FFF0);  // Map to mint
   static const Color _black = Color(0xFF000000);
+  
+  // Music state - Station Berlin Beachhouse
+  bool _isMusicPlaying = true;
+  final String _currentTrack = 'Station Berlin Beachhouse';
 
   late AnimationController _pulseController;
   
@@ -587,9 +593,9 @@ class _RoomUser {
 
 // ============ USER OPTIONS SHEET ============
 class _UserOptionsSheet extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   final _RoomUser user;
@@ -692,9 +698,9 @@ class _UserOptionsSheet extends StatelessWidget {
 
 // ============ USERS LIST SHEET ============
 class _UsersListSheet extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
 
   final List<_RoomUser> users;
   final ScrollController scrollController;

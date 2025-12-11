@@ -15,9 +15,9 @@ class MeatMarketMapView extends StatefulWidget {
 
 class _MeatMarketMapViewState extends State<MeatMarketMapView>
     with TickerProviderStateMixin {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   late AnimationController _pulseController;
@@ -485,7 +485,7 @@ class _MapBackgroundPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final gridPaint = Paint()
-      ..color = const Color(0xFF6B7F4A).withOpacity(0.1)
+      ..color = const Color(0xFFE4FFF0).withOpacity(0.1)
       ..strokeWidth = 1;
 
     final gridSpacing = 60.0 * scale;
@@ -502,7 +502,7 @@ class _MapBackgroundPainter extends CustomPainter {
     // Draw distance rings from center
     final center = Offset(size.width / 2, size.height / 2);
     final ringPaint = Paint()
-      ..color = const Color(0xFFE3F2DE).withOpacity(0.08)
+      ..color = const Color(0xFFE4FFF0).withOpacity(0.08)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
@@ -561,4 +561,5 @@ class _MapUser {
     );
   }
 }
+
 

@@ -1140,8 +1140,8 @@ class _EyePainter extends CustomPainter {
     required this.isReady,
   });
 
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -1208,9 +1208,9 @@ class _EyePainter extends CustomPainter {
 
 // Room Chat Overlay
 class _RoomChatOverlay extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   @override
@@ -1310,9 +1310,9 @@ class _UserSearchOverlay extends StatelessWidget {
 
   const _UserSearchOverlay({required this.users});
 
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   @override
@@ -1452,9 +1452,9 @@ class _UserSearchOverlay extends StatelessWidget {
 
 // Position Filter Modal
 class _PositionFilterModal extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   @override
@@ -1540,9 +1540,9 @@ class _PositionFilterModal extends StatelessWidget {
 
 // Room Explorer Overlay
 class _RoomExplorerOverlay extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   @override
@@ -1668,9 +1668,9 @@ class _DMOverlay extends StatelessWidget {
 
   const _DMOverlay({required this.user});
 
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   @override

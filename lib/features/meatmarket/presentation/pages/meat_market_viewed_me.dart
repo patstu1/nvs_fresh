@@ -14,9 +14,9 @@ class MeatMarketViewedMe extends StatefulWidget {
 }
 
 class _MeatMarketViewedMeState extends State<MeatMarketViewedMe> {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   String _selectedTimeFilter = 'Today';
@@ -322,7 +322,7 @@ class _TrendLinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF20B2A6)
+      ..color = const Color(0xFFE4FFF0)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
@@ -379,4 +379,5 @@ class _ViewedUser {
     );
   }
 }
+
 

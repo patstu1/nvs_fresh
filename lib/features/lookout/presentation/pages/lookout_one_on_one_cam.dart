@@ -22,9 +22,9 @@ class LookoutOneOnOneCam extends StatefulWidget {
 
 class _LookoutOneOnOneCamState extends State<LookoutOneOnOneCam>
     with TickerProviderStateMixin {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   late AnimationController _pulseController;
@@ -487,9 +487,9 @@ class _ChatSheet extends StatefulWidget {
 }
 
 class _ChatSheetState extends State<_ChatSheet> {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   final TextEditingController _messageController = TextEditingController();
@@ -650,4 +650,5 @@ class _ChatMessage {
 
   _ChatMessage(this.text, this.isMe);
 }
+
 

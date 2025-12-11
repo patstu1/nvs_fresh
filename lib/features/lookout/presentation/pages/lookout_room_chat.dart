@@ -21,9 +21,9 @@ class LookoutRoomChat extends StatefulWidget {
 }
 
 class _LookoutRoomChatState extends State<LookoutRoomChat> {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   final TextEditingController _messageController = TextEditingController();
@@ -427,9 +427,9 @@ class _RoomMessage {
 }
 
 class _UserChatOptions extends StatelessWidget {
-  static const Color _mint = Color(0xFFE3F2DE);
-  static const Color _olive = Color(0xFF6B7F4A);
-  static const Color _aqua = Color(0xFF20B2A6);
+  static const Color _mint = Color(0xFFE4FFF0);
+  static const Color _olive = Color(0xFFE4FFF0);
+  static const Color _aqua = Color(0xFFE4FFF0);
   static const Color _black = Color(0xFF000000);
 
   final String username;
@@ -507,4 +507,5 @@ class _UserChatOptions extends StatelessWidget {
     );
   }
 }
+
 

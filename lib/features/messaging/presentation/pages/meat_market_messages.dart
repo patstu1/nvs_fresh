@@ -866,3 +866,4 @@ class _ChatMessage {
 
 enum MessageType { text, photo, album, location }
 
+
